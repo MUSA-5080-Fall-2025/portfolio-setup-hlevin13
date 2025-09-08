@@ -16,7 +16,8 @@ Advanced spatial analysis and data science for urban planning and public policy.
 
 ## About Me
 Hope Levin, 2nd Year Master of City Planning Student
-I'm taking this course because I want to grow as a student. I took GIS last year and learned a little about R, but lack true depth in the topic.
+I'm taking this course because I want to grow as a student. 
+I took GIS last year and learned a little about R, but lack true depth in the topic.
 
 ## Contact
 - Email: hopelevi@upenn.edu
