@@ -31,7 +31,7 @@ date: "2025-09-15"
 - Wide > long
 
 ## Questions & Challenges
-- 
+- When will I figure GitHub out!?
 
 ## Connections to Policy
 **Real-World Examples**
@@ -44,4 +44,4 @@ date: "2025-09-15"
 - Foundation for: understanding community demographics; allocating government resources; tracking neighborhood change; designing fair algorithms
 
 ## Reflection
-- 
+- I'm figuring things out... slowly but surely.
