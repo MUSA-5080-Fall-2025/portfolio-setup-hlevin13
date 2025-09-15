@@ -4,44 +4,38 @@ date: "2025-09-15"
 ---
 
 ## Key Concepts Learned
-**What is an Algorithm?**
-- Set of instructions for solving a problem or completing a task
-
-**Data Analytics is Subjective**
-
-**Algorithmic Decision Making in Government**
-- Systems used to assist or replace human decision-makers
-- Based on predictions from models that process historical data containing:
-	- Inputs (“features,” “predictors,” “independent variable”, “x”)
-	- Outputs (“labels,” “outcome,” “dependent variable”, “y”)
-- Promises efficiency, consistency, objectivity, and cost savings
-
-**Margin of Errors**
-- Large MOE relative to estimate = less reliable
-- Small MOE relative to estimate = more reliable
-- M stands for margin of error in data tables
+- Algorithms: sets of instructions for solving problems or completing tasks
+- Data analytics is inherently subjective
+- Algorithmic decision-making in government:
+   * Assists or replaces human decision-makers
+   * Relies on models that process historical data
+- Inputs: "features," predictors, independent variables, x
+- Outputs: "labels," outcomes, dependent variables, y
+   * Promises efficiency, consistency, objectivity, and cost savings
+- Margin of error (MOE):
+   * Large MOE relative to estimate = less reliable
+   * Small MOE relative to estimate = more reliable
+   * "M" in data tables stands for margin of error
 
 ## Coding Techniques
-**Clarifying Key Terms**
-- Data science - computer science/engineering focus on algorithms and methods
-- Data analytics - application of data science methods to other disciplines
-- Machine learning - algorithms for classification and prediction that learn from data
-- AI - algorithms that adjust and improve across iterations
-
-- Wide > long
+- Clarified distinctions between:
+   * Data science: algorithms/methods, computer science focus
+   * Data analytics: applying data science methods across disciplines
+   * Machine learning: algorithms for classification and prediction that learn from data
+   * Artificial intelligence (AI): algorithms that adjust and improve across iterations
 
 ## Questions & Challenges
-- When will I figure GitHub out!?
+- When will I figure out Github!?
 
 ## Connections to Policy
-**Real-World Examples**
-- Criminal justice/recidivism risk, housing & finance/mortgage lending, healthcare/patient care prioritization
-
-**Government Data Collection History**
-- Civic registration systems, census data, administrative records, operations research
-
-**Why Census Data Matters**
-- Foundation for: understanding community demographics; allocating government resources; tracking neighborhood change; designing fair algorithms
+- Real-World Examples
+   * Criminal justice/recidivism risk
+   * Housing & finance/mortgage lending    
+   * Healthcare/patient care prioritization
+- Government Data Collection History
+   * Civic registration systems, census data, administrative records, operations research
+- Why Census Data Matters
+   * Foundation for understanding community demographics; allocating government resources; tracking neighborhood change; designing fair algorithms
 
 ## Reflection
-- I'm figuring things out... slowly but surely.
+- I'm slowly getting things... I think? 

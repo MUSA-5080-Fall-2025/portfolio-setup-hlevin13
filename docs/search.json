@@ -88,42 +88,42 @@
     "href": "weekly-notes/week-02-notes.html",
     "title": "Week 2 Notes",
     "section": "",
-    "text": "What is an Algorithm? - Set of instructions for solving a problem or completing a task\nData Analytics is Subjective\nAlgorithmic Decision Making in Government - Systems used to assist or replace human decision-makers - Based on predictions from models that process historical data containing: - Inputs (“features,” “predictors,” “independent variable”, “x”) - Outputs (“labels,” “outcome,” “dependent variable”, “y”) - Promises efficiency, consistency, objectivity, and cost savings\nMargin of Errors - Large MOE relative to estimate = less reliable - Small MOE relative to estimate = more reliable - M stands for margin of error in data tables"
+    "text": "Algorithms: sets of instructions for solving problems or completing tasks\nData analytics is inherently subjective\nAlgorithmic decision-making in government:\n\nAssists or replaces human decision-makers\nRelies on models that process historical data\n\nInputs: “features,” predictors, independent variables, x\nOutputs: “labels,” outcomes, dependent variables, y\n\nPromises efficiency, consistency, objectivity, and cost savings\n\nMargin of error (MOE):\n\nLarge MOE relative to estimate = less reliable\nSmall MOE relative to estimate = more reliable\n“M” in data tables stands for margin of error"
   },
   {
     "objectID": "weekly-notes/week-02-notes.html#key-concepts-learned",
     "href": "weekly-notes/week-02-notes.html#key-concepts-learned",
     "title": "Week 2 Notes",
     "section": "",
-    "text": "What is an Algorithm? - Set of instructions for solving a problem or completing a task\nData Analytics is Subjective\nAlgorithmic Decision Making in Government - Systems used to assist or replace human decision-makers - Based on predictions from models that process historical data containing: - Inputs (“features,” “predictors,” “independent variable”, “x”) - Outputs (“labels,” “outcome,” “dependent variable”, “y”) - Promises efficiency, consistency, objectivity, and cost savings\nMargin of Errors - Large MOE relative to estimate = less reliable - Small MOE relative to estimate = more reliable - M stands for margin of error in data tables"
+    "text": "Algorithms: sets of instructions for solving problems or completing tasks\nData analytics is inherently subjective\nAlgorithmic decision-making in government:\n\nAssists or replaces human decision-makers\nRelies on models that process historical data\n\nInputs: “features,” predictors, independent variables, x\nOutputs: “labels,” outcomes, dependent variables, y\n\nPromises efficiency, consistency, objectivity, and cost savings\n\nMargin of error (MOE):\n\nLarge MOE relative to estimate = less reliable\nSmall MOE relative to estimate = more reliable\n“M” in data tables stands for margin of error"
   },
   {
     "objectID": "weekly-notes/week-02-notes.html#coding-techniques",
     "href": "weekly-notes/week-02-notes.html#coding-techniques",
     "title": "Week 2 Notes",
     "section": "Coding Techniques",
-    "text": "Coding Techniques\nClarifying Key Terms - Data science - computer science/engineering focus on algorithms and methods - Data analytics - application of data science methods to other disciplines - Machine learning - algorithms for classification and prediction that learn from data - AI - algorithms that adjust and improve across iterations\n\nWide &gt; long"
+    "text": "Coding Techniques\n\nClarified distinctions between:\n\nData science: algorithms/methods, computer science focus\nData analytics: applying data science methods across disciplines\nMachine learning: algorithms for classification and prediction that learn from data\nArtificial intelligence (AI): algorithms that adjust and improve across iterations"
   },
   {
     "objectID": "weekly-notes/week-02-notes.html#questions-challenges",
     "href": "weekly-notes/week-02-notes.html#questions-challenges",
     "title": "Week 2 Notes",
     "section": "Questions & Challenges",
-    "text": "Questions & Challenges\n\nWhen will I figure GitHub out!?"
+    "text": "Questions & Challenges\n\nWhen will I figure out Github!?"
   },
   {
     "objectID": "weekly-notes/week-02-notes.html#connections-to-policy",
     "href": "weekly-notes/week-02-notes.html#connections-to-policy",
     "title": "Week 2 Notes",
     "section": "Connections to Policy",
-    "text": "Connections to Policy\nReal-World Examples - Criminal justice/recidivism risk, housing & finance/mortgage lending, healthcare/patient care prioritization\nGovernment Data Collection History - Civic registration systems, census data, administrative records, operations research\nWhy Census Data Matters - Foundation for: understanding community demographics; allocating government resources; tracking neighborhood change; designing fair algorithms"
+    "text": "Connections to Policy\n\nReal-World Examples\n\nCriminal justice/recidivism risk\nHousing & finance/mortgage lending\n\nHealthcare/patient care prioritization\n\nGovernment Data Collection History\n\nCivic registration systems, census data, administrative records, operations research\n\nWhy Census Data Matters\n\nFoundation for understanding community demographics; allocating government resources; tracking neighborhood change; designing fair algorithms"
   },
   {
     "objectID": "weekly-notes/week-02-notes.html#reflection",
     "href": "weekly-notes/week-02-notes.html#reflection",
     "title": "Week 2 Notes",
     "section": "Reflection",
-    "text": "Reflection\n\nI’m figuring things out… slowly but surely."
+    "text": "Reflection\n\nI’m slowly getting things… I think?"
   },
   {
     "objectID": "labs/lab0/scripts/lab0_template.html",
@@ -278,5 +278,33 @@
     "title": "Week 1 Notes - Course Introduction",
     "section": "Reflection",
     "text": "Reflection\n\nThe possibilities of where this class can take me… it feels open and like I can take it anywhere."
+  },
+  {
+    "objectID": "weekly-notes/week-02-notes.html#why-census-data-matters",
+    "href": "weekly-notes/week-02-notes.html#why-census-data-matters",
+    "title": "Week 2 Notes",
+    "section": "Why Census Data Matters",
+    "text": "Why Census Data Matters\n\nFoundation for: understanding community demographics; allocating government resources; tracking neighborhood change; designing fair algorithms"
+  },
+  {
+    "objectID": "weekly-notes/week-02-notes.html#what-is-an-algorithm",
+    "href": "weekly-notes/week-02-notes.html#what-is-an-algorithm",
+    "title": "Week 2 Notes",
+    "section": "What is an Algorithm?",
+    "text": "What is an Algorithm?\nSet of instructions for solving a problem or completing a task\nData Analytics is Subjective"
+  },
+  {
+    "objectID": "weekly-notes/week-02-notes.html#algorithmic-decision-making-in-government",
+    "href": "weekly-notes/week-02-notes.html#algorithmic-decision-making-in-government",
+    "title": "Week 2 Notes",
+    "section": "Algorithmic Decision Making in Government",
+    "text": "Algorithmic Decision Making in Government\nSystems used to assist or replace human decision-makers\nBased on predictions from models that process historical data containing: - Inputs (“features,” “predictors,” “independent variable”, “x”) - Outputs (“labels,” “outcome,” “dependent variable”, “y”) Promises efficiency, consistency, objectivity, and cost savings"
+  },
+  {
+    "objectID": "weekly-notes/week-02-notes.html#margin-of-errors",
+    "href": "weekly-notes/week-02-notes.html#margin-of-errors",
+    "title": "Week 2 Notes",
+    "section": "Margin of Errors",
+    "text": "Margin of Errors\n\nLarge MOE relative to estimate = less reliable\nSmall MOE relative to estimate = more reliable\nM stands for margin of error in data tables"
   }
 ]
