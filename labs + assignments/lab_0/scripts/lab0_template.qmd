@@ -64,7 +64,7 @@ head(car_data)
 - Rows: [50,000]
 - Columns: [7]  
 - Variable types: [integer, numeric, character, factor]
-- Problematic names: [Fuel type?]
+- Problematic names: [Fuel type]
 
 ## 1.2 Tibble vs Data Frame
 

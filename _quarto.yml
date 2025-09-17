@@ -14,6 +14,11 @@ website:
             text: Week 1
           - href: weekly-notes/week-02-notes.qmd
             text: Week 2
+      - text: Assignments 
+        menu:
+          - href: assignments/assignment_1/assignment1.qmd
+            text: "Assignment 1: Census Data Exploration"
+    
 format:
   html:
     theme: cosmo
