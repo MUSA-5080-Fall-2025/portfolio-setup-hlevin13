@@ -52,13 +52,19 @@ If there is a special character like comma, you need use double quote mark so th
 
 ```{r setup}
 # Load required packages (hint: you need tidycensus, tidyverse, and knitr)
+library(tidycensus)
+library(tidyverse)
+library(knitr)
 
 # Set your Census API key
+census_api_key("5a82e243438bea307ae1c04f150d539c4db5fa47", install = TRUE, overwrite = TRUE)
+readRenviron("~/.Renviron")
 
 # Choose your state for analysis - assign it to a variable called my_state
+my_state <- "New York"
 ```
 
-**State Selection:** I have chosen **[Your State Name]** for this analysis because: [Brief explanation of why you chose this state]
+**State Selection:** I have chosen **New York** for this analysis because: I'm from New York! Also, I've never been able to work with NYS data for a class assignment at Penn.
 
 # Part 2: County-Level Resource Assessment
 
@@ -77,11 +83,30 @@ If there is a special character like comma, you need use double quote mark so th
 
 ```{r county-data}
 # Write your get_acs() code here
+ny_county <- get_acs(
+    geography = "county",
+    state = my_state,
+    variables = c(median_h_income = "B19013_001", total_population = "B01003_001"),
+    survey = "acs5",
+    year = 2022,
+    output = "wide"
+)
+
+# Look at the first few rows
+head(ny_county)
 
 # Clean the county names to remove state name and "County" 
 # Hint: use mutate() with str_remove()
+ny_county_2 <- ny_county %>%
+    mutate(
+      county = NAME %>%
+        str_remove("County, New York")
+    )
+
+##ASK IN OFFICE HOURS ABOUT REMOVING COLUMN?
 
 # Display the first few rows
+head(ny_county_2)
 ```
 
 ## 2.2 Data Quality Assessment
@@ -100,6 +125,17 @@ If there is a special character like comma, you need use double quote mark so th
 
 ```{r income-reliability}
 # Calculate MOE percentage and reliability categories using mutate()
+ny_county_2 <- ny_county %>%
+    mutate(
+      county = NAME %>%
+        str_remove("County, New York")
+    )
+
+avg_price_by_brand <- car_data %>%
+  group_by(Manufacturer) %>%
+  summarize(avg_price = mean(Price, na.rm = TRUE))
+
+mutate()
 
 # Create a summary showing count of counties in each reliability category
 # Hint: use count() and mutate() to add percentages
