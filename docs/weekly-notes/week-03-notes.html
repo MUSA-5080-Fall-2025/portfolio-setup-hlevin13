@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2025-09-15">
+<meta name="dcterms.date" content="2025-09-22">
 
-<title>Week 2 Notes – Hope Levin - MUSA 5080 Portfolio</title>
+<title>Week 3 Notes – Hope Levin - MUSA 5080 Portfolio</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -151,7 +151,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Week 2 Notes</h1>
+<h1 class="title">Week 3 Notes</h1>
 </div>
 
 
@@ -162,7 +162,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 15, 2025</p>
+      <p class="date">September 22, 2025</p>
     </div>
   </div>
   
@@ -177,68 +177,63 @@ ul.task-list li input[type="checkbox"] {
 <section id="key-concepts-learned" class="level2">
 <h2 class="anchored" data-anchor-id="key-concepts-learned">Key Concepts Learned</h2>
 <ul>
-<li>Algorithms: sets of instructions for solving problems or completing tasks</li>
-<li>Data analytics is inherently subjective</li>
-<li>Algorithmic decision-making in government:
+<li>Anscombe’s Quartet
 <ul>
-<li>Assists or replaces human decision-makers</li>
-<li>Relies on models that process historical data</li>
+<li>Four datasets with identical summary statistics</li>
+<li>Same means, variances, correlation, and regression line</li>
 </ul></li>
-<li>Inputs: “features,” predictors, independent variables, x</li>
-<li>Outputs: “labels,” outcomes, dependent variables, y
+<li>The ggplot2 Philosophy
 <ul>
-<li>Promises efficiency, consistency, objectivity, and cost savings</li>
+<li>Data &gt; aesthetics &gt; geometries &gt; visual</li>
+<li>g &lt;- ggplot(data = your_data) + aes(x = income, y = %_bach) + geom_something (color = “blue”)</li>
 </ul></li>
-<li>Margin of error (MOE):
-<ul>
-<li>Large MOE relative to estimate = less reliable</li>
-<li>Small MOE relative to estimate = more reliable</li>
-<li>“M” in data tables stands for margin of error</li>
-</ul></li>
+<li>Exploratory data analysis - what does the data look like? what patterns exist?</li>
 </ul>
 </section>
 <section id="coding-techniques" class="level2">
 <h2 class="anchored" data-anchor-id="coding-techniques">Coding Techniques</h2>
 <ul>
-<li>Clarified distinctions between:
+<li>aes (aesthethic) describes how variables in the data are mapped to visual properties of geoms
 <ul>
-<li>Data science: algorithms/methods, computer science focus</li>
-<li>Data analytics: applying data science methods across disciplines</li>
-<li>Machine learning: algorithms for classification and prediction that learn from data</li>
-<li>Artificial intelligence (AI): algorithms that adjust and improve across iterations</li>
+<li>This is not where you pick out the color or size… do that in geom_something</li>
+<li>Aesthetics go inside aes(), constants go outside</li>
 </ul></li>
+<li>Aesthetic Mappings
+<ul>
+<li>x,y - position</li>
+<li>color - point/line color</li>
+<li>fill - area fill color</li>
+<li>size - point/line size</li>
+<li>shape - point shape</li>
+<li>alpha - transparency</li>
+</ul></li>
+<li>regrex ignores cases when searching</li>
+<li>[Xx] is a trick to search for all capitalization variations</li>
+<li>““Total.*population” = looking for “total something population”</li>
 </ul>
 </section>
 <section id="questions-challenges" class="level2">
 <h2 class="anchored" data-anchor-id="questions-challenges">Questions &amp; Challenges</h2>
 <ul>
-<li>When will I figure out Github!?</li>
+<li>Remembering to update table names.</li>
 </ul>
 </section>
 <section id="connections-to-policy" class="level2">
 <h2 class="anchored" data-anchor-id="connections-to-policy">Connections to Policy</h2>
 <ul>
-<li>Real-World Examples
+<li>Policy Implications:
 <ul>
-<li>Criminal justice/recidivism risk</li>
-<li>Housing &amp; finance/mortgage lending<br>
-</li>
-<li>Healthcare/patient care prioritization</li>
-</ul></li>
-<li>Government Data Collection History
-<ul>
-<li>Civic registration systems, census data, administrative records, operations research</li>
-</ul></li>
-<li>Why Census Data Matters
-<ul>
-<li>Foundation for understanding community demographics; allocating government resources; tracking neighborhood change; designing fair algorithms</li>
+<li>Summary statistics can hide critical patterns</li>
+<li>Outliers may represent important communities</li>
+<li>Relationships aren’t always linear</li>
 </ul></li>
 </ul>
 </section>
 <section id="reflection" class="level2">
 <h2 class="anchored" data-anchor-id="reflection">Reflection</h2>
 <ul>
-<li>I’m slowly getting things… I think?</li>
+<li>I have to reclone my repo way too often.</li>
+<li>Class is moving on by without or without me ahaha!</li>
 </ul>
 
 

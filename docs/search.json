@@ -495,5 +495,47 @@
     "title": "Lab 0: Getting Started with dplyr",
     "section": "5.2 Categorical Summaries",
     "text": "5.2 Categorical Summaries\n\n# Frequency table for price categories"
+  },
+  {
+    "objectID": "weekly-notes/week-03-notes.html",
+    "href": "weekly-notes/week-03-notes.html",
+    "title": "Week 3 Notes",
+    "section": "",
+    "text": "Anscombe’s Quartet\n\nFour datasets with identical summary statistics\nSame means, variances, correlation, and regression line\n\nThe ggplot2 Philosophy\n\nData &gt; aesthetics &gt; geometries &gt; visual\ng &lt;- ggplot(data = your_data) + aes(x = income, y = %_bach) + geom_something (color = “blue”)\n\nExploratory data analysis - what does the data look like? what patterns exist?"
+  },
+  {
+    "objectID": "weekly-notes/week-03-notes.html#key-concepts-learned",
+    "href": "weekly-notes/week-03-notes.html#key-concepts-learned",
+    "title": "Week 3 Notes",
+    "section": "",
+    "text": "Anscombe’s Quartet\n\nFour datasets with identical summary statistics\nSame means, variances, correlation, and regression line\n\nThe ggplot2 Philosophy\n\nData &gt; aesthetics &gt; geometries &gt; visual\ng &lt;- ggplot(data = your_data) + aes(x = income, y = %_bach) + geom_something (color = “blue”)\n\nExploratory data analysis - what does the data look like? what patterns exist?"
+  },
+  {
+    "objectID": "weekly-notes/week-03-notes.html#coding-techniques",
+    "href": "weekly-notes/week-03-notes.html#coding-techniques",
+    "title": "Week 3 Notes",
+    "section": "Coding Techniques",
+    "text": "Coding Techniques\n\naes (aesthethic) describes how variables in the data are mapped to visual properties of geoms\n\nThis is not where you pick out the color or size… do that in geom_something\nAesthetics go inside aes(), constants go outside\n\nAesthetic Mappings\n\nx,y - position\ncolor - point/line color\nfill - area fill color\nsize - point/line size\nshape - point shape\nalpha - transparency\n\nregrex ignores cases when searching\n[Xx] is a trick to search for all capitalization variations\n““Total.*population” = looking for “total something population”"
+  },
+  {
+    "objectID": "weekly-notes/week-03-notes.html#questions-challenges",
+    "href": "weekly-notes/week-03-notes.html#questions-challenges",
+    "title": "Week 3 Notes",
+    "section": "Questions & Challenges",
+    "text": "Questions & Challenges\n\nRemembering to update table names."
+  },
+  {
+    "objectID": "weekly-notes/week-03-notes.html#connections-to-policy",
+    "href": "weekly-notes/week-03-notes.html#connections-to-policy",
+    "title": "Week 3 Notes",
+    "section": "Connections to Policy",
+    "text": "Connections to Policy\n\nPolicy Implications:\n\nSummary statistics can hide critical patterns\nOutliers may represent important communities\nRelationships aren’t always linear"
+  },
+  {
+    "objectID": "weekly-notes/week-03-notes.html#reflection",
+    "href": "weekly-notes/week-03-notes.html#reflection",
+    "title": "Week 3 Notes",
+    "section": "Reflection",
+    "text": "Reflection\n\nI have to reclone my repo way too often.\nClass is moving on by without or without me ahaha!"
   }
 ]
