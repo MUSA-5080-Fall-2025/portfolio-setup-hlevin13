@@ -304,7 +304,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Choose your state for analysis - assign it to a variable called my_state</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>my_state <span class="ot">&lt;-</span> <span class="st">"New York"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p><strong>State Selection:</strong> I have chosen <strong>New York</strong> for this analysis because: I’m from New York! Also, I’ve never been able to work with NYS data for a class assignment at Penn.</p>
+<p><strong>State Selection:</strong></p>
+<p>I have chosen <strong>New York</strong> for this analysis because: I’m from New York! Also, I’ve never been able to work with NYS data for a class assignment at Penn.</p>
 </section>
 <section id="part-2-county-level-resource-assessment" class="level1">
 <h1>Part 2: County-Level Resource Assessment</h1>
@@ -475,7 +476,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p><strong>Data Quality Commentary:</strong></p>
-<p>[Write 2-3 sentences explaining what these results mean for algorithmic decision-making. Consider: Which counties might be poorly served by algorithms that rely on this income data? What factors might contribute to higher uncertainty?]</p>
 <p>Counties that have a high MOE/those marked as the “Low Confidence” may be poorly served by algorithms, as it is assumed that the data inputted is precise. These counties tend to be in rural areas, where the population size is much smaller than their urban or suburban counterparts, therefore creating a smaller sample size.</p>
 </section>
 </section>
@@ -509,7 +509,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 3 "Hamilton "         66891          11.4  Low Confidence     </code></pre>
 </div>
 </div>
-<p><strong>Comment on the output:</strong> Interesting how Hamilton and Essex County are border each other, and are predominantly known for the Adirondacks, yet have such different population and MOE figures. But, the most interesting part, is seeing my work come to life! Feeling like Dr.&nbsp;Frankenstein hehe.</p>
+<p><strong>Comment on the Output:</strong></p>
+<p>Interesting how Hamilton and Essex County are border each other, and are predominantly known for the Adirondacks, yet have such different population and MOE figures. But, the most interesting part, is seeing my work come to life! Feeling like Dr.&nbsp;Frankenstein hehe.</p>
 </section>
 <section id="tract-level-demographics" class="level2">
 <h2 class="anchored" data-anchor-id="tract-level-demographics">3.2 Tract-Level Demographics</h2>
@@ -721,7 +722,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 </div>
 </div>
-<p><strong>Pattern Analysis:</strong> [Describe any patterns you observe. Do certain types of communities have less reliable data? What might explain this?] All tracts were marked as having a high MOE. Because the sample sizes were small, any discrepancy between E and M counts immediately hijacks the MOE.</p>
+<p><strong>Pattern Analysis:</strong></p>
+<p>All tracts were marked as having a high MOE. Because the sample sizes were small, any discrepancy between E and M counts immediately hijacks the MOE.</p>
 <p>Many of the MOEs for Black and Hispanic populations were zero, which forced R to print them as nfs. The data can therefore be understood as being less reliable.</p>
 </section>
 </section>
@@ -1228,24 +1230,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Key Recommendations:</strong></p>
 <p><strong>Your Task:</strong> Use your analysis results to provide specific guidance to the department.</p>
 <ol type="1">
-<li><strong>Counties suitable for immediate algorithmic implementation:</strong> [List counties with high confidence data and explain why they’re appropriate]</li>
+<li><strong>Counties suitable for immediate algorithmic implementation:</strong> Albany, Allegany, Bronx, Broome, Cattaraugus, Cayuga, Chautauqua, Chemung, Chenango, Clinton, Columbia, Cortland, Delaware, Dutchess, Erie, Franklin, Fulton, Genesee, Herkimer, Jefferson, Kings, Lewis, Livingston, Madison, Monroe, Montgomery, Nassau, New York, Niagara, Oneida, Onondaga, Ontario, Orange, Orleans, Oswego, Otsego, Putnam, Queens, Rensselaer, Richmond, Rockland, St.&nbsp;Lawrence, Saratoga, Schenectady, Schoharie, Steuben, Suffolk, Sullivan, Tioga, Tompkins, Ulster, Warren, Washington, Wayne, Westchester, Wyoming</li>
 </ol>
-<p>Albany, Allegany, Bronx, Broome, Cattaraugus, Cayuga, Chautauqua, Chemung, Chenango, Clinton, Columbia, Cortland, Delaware, Dutchess, Erie, Franklin, Fulton, Genesee, Herkimer, Jefferson, Kings, Lewis, Livingston, Madison, Monroe, Montgomery, Nassau, New York, Niagara, Oneida, Onondaga, Ontario, Orange, Orleans, Oswego, Otsego, Putnam, Queens, Rensselaer, Richmond, Rockland, St.&nbsp;Lawrence, Saratoga, Schenectady, Schoharie, Steuben, Suffolk, Sullivan, Tioga, Tompkins, Ulster, Warren, Washington, Wayne, Westchester, Wyoming</p>
 <p>These counties are suitable as their MOE is less than 5%, an indication that the data is reliable.</p>
 <ol start="2" type="1">
-<li><strong>Counties requiring additional oversight:</strong> [List counties with moderate confidence data and describe what kind of monitoring would be needed]</li>
+<li><strong>Counties requiring additional oversight:</strong> Essex, Greene, Schuyler, Seneca, Yates</li>
 </ol>
-<p>Essex, Greene, Schuyler, Seneca, Yates</p>
 <p>These counties need additional oversight as their MOE is between 5 and 10%. To boost confidence, the algorithm should incorporate factors that weigh income data. Otherwise, more diligent processes would be required when conducting census sampling.</p>
 <ol start="3" type="1">
-<li><strong>Counties needing alternative approaches:</strong> [List counties with low confidence data and suggest specific alternatives - manual review, additional surveys, etc.]</li>
+<li><strong>Counties needing alternative approaches:</strong> Hamilton</li>
 </ol>
-<p>Hamilton</p>
 <p>This county has an MOE greater than 10%, which indicates that the data is unreliable. To counteract this, manual review should occur to validate estimates before being processed by the algorithm. Otherwise, the only two options are to incorporate local data into findings, or exclude all data until reliable findings are available.</p>
 </section>
 <section id="questions-for-further-investigation" class="level2">
 <h2 class="anchored" data-anchor-id="questions-for-further-investigation">Questions for Further Investigation</h2>
-<p>[List 2-3 questions that your analysis raised that you’d like to explore further in future assignments. Consider questions about spatial patterns, time trends, or other demographic factors.]</p>
 <ol type="1">
 <li>How have MOEs changed over time? Have demographic estimates improved as the federal government now better recognizes minorities in the US?</li>
 <li>Is it a trend across over states to have clusters of high or low MOE tracts? And if so, what is the common thread between these tracts?</li>

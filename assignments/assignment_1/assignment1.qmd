@@ -12,41 +12,58 @@ format:
 execute:
   warning: false
   message: false
+editor: 
+  markdown: 
+    wrap: 72
 ---
 
 # Assignment Overview
 
 ## Scenario
 
-You are a data analyst for the **New York State Department of Human Services**. The department is considering implementing an algorithmic system to identify communities that should receive priority for social service funding and outreach programs. Your supervisor has asked you to evaluate the quality and reliability of available census data to inform this decision.
+You are a data analyst for the **New York State Department of Human
+Services**. The department is considering implementing an algorithmic
+system to identify communities that should receive priority for social
+service funding and outreach programs. Your supervisor has asked you to
+evaluate the quality and reliability of available census data to inform
+this decision.
 
-Drawing on our Week 2 discussion of algorithmic bias, you need to assess not just what the data shows, but how reliable it is and what communities might be affected by data quality issues.
+Drawing on our Week 2 discussion of algorithmic bias, you need to assess
+not just what the data shows, but how reliable it is and what
+communities might be affected by data quality issues.
 
 ## Learning Objectives
 
-- Apply dplyr functions to real census data for policy analysis
-- Evaluate data quality using margins of error 
-- Connect technical analysis to algorithmic decision-making
-- Identify potential equity implications of data reliability issues
-- Create professional documentation for policy stakeholders
+-   Apply dplyr functions to real census data for policy analysis
+-   Evaluate data quality using margins of error
+-   Connect technical analysis to algorithmic decision-making
+-   Identify potential equity implications of data reliability issues
+-   Create professional documentation for policy stakeholders
 
 ## Submission Instructions
 
-**Submit by posting your updated portfolio link on Canvas.** Your assignment should be accessible at `your-portfolio-url/assignments/assignment_1/`
+**Submit by posting your updated portfolio link on Canvas.** Your
+assignment should be accessible at
+`your-portfolio-url/assignments/assignment_1/`
 
-Make sure to update your `_quarto.yml` navigation to include this assignment under an "Assignments" menu.
+Make sure to update your `_quarto.yml` navigation to include this
+assignment under an "Assignments" menu.
 
 # Part 1: Portfolio Integration
 
-Create this assignment in your portfolio repository under an `assignments/assignment_1/` folder structure. Update your navigation menu to include:
+Create this assignment in your portfolio repository under an
+`assignments/assignment_1/` folder structure. Update your navigation
+menu to include:
 
-```
+```         
 - text: Assignments
   menu:
     - href: assignments/assignment_1/your_file_name.qmd
       text: "Assignment 1: Census Data Exploration"
 ```
-If there is a special character like comma, you need use double quote mark so that the quarto can identify this as text
+
+If there is a special character like comma, you need use double quote
+mark so that the quarto can identify this as text
 
 # Setup
 
@@ -64,22 +81,25 @@ readRenviron("~/.Renviron")
 my_state <- "New York"
 ```
 
-**State Selection:** I have chosen **New York** for this analysis because: I'm from New York! Also, I've never been able to work with NYS data for a class assignment at Penn.
+**State Selection:**
+
+I have chosen **New York** for this analysis because: I'm from New York!
+Also, I've never been able to work with NYS data for a class assignment
+at Penn.
 
 # Part 2: County-Level Resource Assessment
 
 ## 2.1 Data Retrieval
 
-**Your Task:** Use `get_acs()` to retrieve county-level data for your chosen state.
+**Your Task:** Use `get_acs()` to retrieve county-level data for your
+chosen state.
 
-**Requirements:**
-- Geography: county level
-- Variables: median household income (B19013_001) and total population (B01003_001)  
-- Year: 2022
-- Survey: acs5
-- Output format: wide
+**Requirements:** - Geography: county level - Variables: median
+household income (B19013_001) and total population (B01003_001)\
+- Year: 2022 - Survey: acs5 - Output format: wide
 
-**Hint:** Remember to give your variables descriptive names using the `variables = c(name = "code")` syntax.
+**Hint:** Remember to give your variables descriptive names using the
+`variables = c(name = "code")` syntax.
 
 ```{r county-data}
 # Write your get_acs() code here
@@ -106,15 +126,14 @@ head(ny_clean)
 
 ## 2.2 Data Quality Assessment
 
-**Your Task:** Calculate margin of error percentages and create reliability categories.
+**Your Task:** Calculate margin of error percentages and create
+reliability categories.
 
-**Requirements:**
-- Calculate MOE percentage: (margin of error / estimate) * 100
-- Create reliability categories:
-  - High Confidence: MOE < 5%
-  - Moderate Confidence: MOE 5-10%  
-  - Low Confidence: MOE > 10%
-- Create a flag for unreliable estimates (MOE > 10%)
+**Requirements:** - Calculate MOE percentage: (margin of error /
+estimate) \* 100 - Create reliability categories: - High Confidence: MOE
+\< 5% - Moderate Confidence: MOE 5-10%\
+- Low Confidence: MOE \> 10% - Create a flag for unreliable estimates
+(MOE \> 10%)
 
 **Hint:** Use `mutate()` with `case_when()` for the categories.
 
@@ -144,11 +163,10 @@ head(reliability_summary)
 
 **Your Task:** Identify the 5 counties with the highest MOE percentages.
 
-**Requirements:**
-- Sort by MOE percentage (highest first)
-- Select the top 5 counties
-- Display: county name, median income, margin of error, MOE percentage, reliability category
-- Format as a professional table using `kable()`
+**Requirements:** - Sort by MOE percentage (highest first) - Select the
+top 5 counties - Display: county name, median income, margin of error,
+MOE percentage, reliability category - Format as a professional table
+using `kable()`
 
 **Hint:** Use `arrange()`, `slice()`, and `select()` functions.
 
@@ -172,17 +190,22 @@ kable(high_moe,
 
 **Data Quality Commentary:**
 
-[Write 2-3 sentences explaining what these results mean for algorithmic decision-making. Consider: Which counties might be poorly served by algorithms that rely on this income data? What factors might contribute to higher uncertainty?]
-
-Counties that have a high MOE/those marked as the "Low Confidence" may be poorly served by algorithms, as it is assumed that the data inputted is precise. These counties tend to be in rural areas, where the population size is much smaller than their urban or suburban counterparts, therefore creating a smaller sample size.
+Counties that have a high MOE/those marked as the "Low Confidence" may
+be poorly served by algorithms, as it is assumed that the data inputted
+is precise. These counties tend to be in rural areas, where the
+population size is much smaller than their urban or suburban
+counterparts, therefore creating a smaller sample size.
 
 # Part 3: Neighborhood-Level Analysis
 
 ## 3.1 Focus Area Selection
 
-**Your Task:** Select 2-3 counties from your reliability analysis for detailed tract-level study.
+**Your Task:** Select 2-3 counties from your reliability analysis for
+detailed tract-level study.
 
-**Strategy:** Choose counties that represent different reliability levels (e.g., 1 high confidence, 1 moderate, 1 low confidence) to compare how data quality varies.
+**Strategy:** Choose counties that represent different reliability
+levels (e.g., 1 high confidence, 1 moderate, 1 low confidence) to
+compare how data quality varies.
 
 ```{r select-counties}
 # Use filter() to select 2-3 counties from your county_reliability data
@@ -202,19 +225,24 @@ selected_counties %>%
 
 ```
 
-**Comment on the output:** 
-Interesting how Hamilton and Essex County are border each other, and are predominantly known for the Adirondacks, yet have such different population and MOE figures. But, the most interesting part, is seeing my work come to life! Feeling like Dr. Frankenstein hehe.
+**Comment on the Output:**
+
+Interesting how Hamilton and Essex County are border each other, and are
+predominantly known for the Adirondacks, yet have such different
+population and MOE figures. But, the most interesting part, is seeing my
+work come to life! Feeling like Dr. Frankenstein hehe.
 
 ## 3.2 Tract-Level Demographics
 
-**Your Task:** Get demographic data for census tracts in your selected counties.
+**Your Task:** Get demographic data for census tracts in your selected
+counties.
 
-**Requirements:**
-- Geography: tract level
-- Variables: white alone (B03002_003), Black/African American (B03002_004), Hispanic/Latino (B03002_012), total population (B03002_001)
-- Use the same state and year as before
-- Output format: wide
-- **Challenge:** You'll need county codes, not names. Look at the GEOID patterns in your county data for hints.
+**Requirements:** - Geography: tract level - Variables: white alone
+(B03002_003), Black/African American (B03002_004), Hispanic/Latino
+(B03002_012), total population (B03002_001) - Use the same state and
+year as before - Output format: wide - **Challenge:** You'll need county
+codes, not names. Look at the GEOID patterns in your county data for
+hints.
 
 ```{r tract-demographics}
 # Define your race/ethnicity variables with descriptive names
@@ -289,12 +317,12 @@ kable(averages,
 
 ## 4.1 MOE Analysis for Demographic Variables
 
-**Your Task:** Examine margins of error for demographic variables to see if some communities have less reliable data.
+**Your Task:** Examine margins of error for demographic variables to see
+if some communities have less reliable data.
 
-**Requirements:**
-- Calculate MOE percentages for each demographic variable
-- Flag tracts where any demographic variable has MOE > 15%
-- Create summary statistics
+**Requirements:** - Calculate MOE percentages for each demographic
+variable - Flag tracts where any demographic variable has MOE \> 15% -
+Create summary statistics
 
 ```{r demographic-moe}
 # Calculate MOE percentages for white, Black, and Hispanic variables
@@ -329,7 +357,8 @@ race_moe_summary
 
 ## 4.2 Pattern Analysis
 
-**Your Task:** Investigate whether data quality problems are randomly distributed or concentrated in certain types of communities.
+**Your Task:** Investigate whether data quality problems are randomly
+distributed or concentrated in certain types of communities.
 
 ```{r pattern-analysis}
 # Group tracts by whether they have high MOE issues
@@ -355,30 +384,50 @@ kable(pattern_analysis,
         )
 ```
 
-**Pattern Analysis:** [Describe any patterns you observe. Do certain types of communities have less reliable data? What might explain this?]
-All tracts were marked as having a high MOE. Because the sample sizes were small, any discrepancy between E and M counts immediately hijacks the MOE.
+**Pattern Analysis:**
 
-Many of the MOEs for Black and Hispanic populations were zero, which forced R to print them as nfs. The data can therefore be understood as being less reliable.
+All tracts were marked as having a high MOE. Because the sample sizes
+were small, any discrepancy between E and M counts immediately hijacks
+the MOE.
+
+Many of the MOEs for Black and Hispanic populations were zero, which
+forced R to print them as nfs. The data can therefore be understood as
+being less reliable.
 
 # Part 5: Policy Recommendations
 
 ## 5.1 Analysis Integration and Professional Summary
 
-**Your Task:** Write an executive summary that integrates findings from all four analyses.
+**Your Task:** Write an executive summary that integrates findings from
+all four analyses.
 
-**Executive Summary Requirements:**
-1. **Overall Pattern Identification**: What are the systematic patterns across all your analyses?
-2. **Equity Assessment**: Which communities face the greatest risk of algorithmic bias based on your findings?
-3. **Root Cause Analysis**: What underlying factors drive both data quality issues and bias risk?
-4. **Strategic Recommendations**: What should the Department implement to address these systematic issues?
+**Executive Summary Requirements:** 1. **Overall Pattern
+Identification**: What are the systematic patterns across all your
+analyses? 2. **Equity Assessment**: Which communities face the greatest
+risk of algorithmic bias based on your findings? 3. **Root Cause
+Analysis**: What underlying factors drive both data quality issues and
+bias risk? 4. **Strategic Recommendations**: What should the Department
+implement to address these systematic issues?
 
 **Executive Summary:**
 
-1. Systematic patterns that emerged from analyses fall within the topics of data reliability and demographics. For instance, at the county level, median household income estimates varied greatly in reliability, with some noted as “low confidence.” When analyses zoomed in to the tract level, reliability issues emerged when examining Black and Hispanic populations. Many were discounted from results, with analyses marking their stats as “lnf.”
-2. Communities that face the greatest algorithmic bias are rural/smaller populations, and diverse groups. 
-3. Underlying factors driving quality and bias risk issues include small population sizes, uncertain counts of non-white populations, and census polling limitations in rural areas.
-4. To correctly count New York State’s populations, the Census Bureau should intentionally plan and curate engagement in historically undercounted areas/populations. Another idea is to alter the algorithm to include better reliability metrics, like weighed counts.
-
+1.  Systematic patterns that emerged from analyses fall within the
+    topics of data reliability and demographics. For instance, at the
+    county level, median household income estimates varied greatly in
+    reliability, with some noted as “low confidence.” When analyses
+    zoomed in to the tract level, reliability issues emerged when
+    examining Black and Hispanic populations. Many were discounted from
+    results, with analyses marking their stats as “lnf.”
+2.  Communities that face the greatest algorithmic bias are
+    rural/smaller populations, and diverse groups.
+3.  Underlying factors driving quality and bias risk issues include
+    small population sizes, uncertain counts of non-white populations,
+    and census polling limitations in rural areas.
+4.  To correctly count New York State’s populations, the Census Bureau
+    should intentionally plan and curate engagement in historically
+    undercounted areas/populations. Another idea is to alter the
+    algorithm to include better reliability metrics, like weighed
+    counts.
 
 ## 6.3 Specific Recommendations
 
@@ -414,62 +463,76 @@ kable(specific_recommendations,
 
 **Key Recommendations:**
 
-**Your Task:** Use your analysis results to provide specific guidance to the department.
+**Your Task:** Use your analysis results to provide specific guidance to
+the department.
 
-1. **Counties suitable for immediate algorithmic implementation:** [List counties with high confidence data and explain why they're appropriate]
+1.  **Counties suitable for immediate algorithmic implementation:**
+    Albany, Allegany, Bronx, Broome, Cattaraugus, Cayuga, Chautauqua,
+    Chemung, Chenango, Clinton, Columbia, Cortland, Delaware, Dutchess,
+    Erie, Franklin, Fulton, Genesee, Herkimer, Jefferson, Kings, Lewis,
+    Livingston, Madison, Monroe, Montgomery, Nassau, New York, Niagara,
+    Oneida, Onondaga, Ontario, Orange, Orleans, Oswego, Otsego, Putnam,
+    Queens, Rensselaer, Richmond, Rockland, St. Lawrence, Saratoga,
+    Schenectady, Schoharie, Steuben, Suffolk, Sullivan, Tioga, Tompkins,
+    Ulster, Warren, Washington, Wayne, Westchester, Wyoming
 
-Albany, Allegany, Bronx, Broome, Cattaraugus, Cayuga, Chautauqua, Chemung, Chenango, Clinton, Columbia, Cortland, Delaware, Dutchess, Erie, Franklin, Fulton, Genesee, Herkimer, Jefferson, Kings, Lewis, Livingston, Madison, Monroe, Montgomery, Nassau, New York, Niagara, Oneida, Onondaga, Ontario, Orange, Orleans, Oswego, Otsego, Putnam, Queens, Rensselaer, Richmond, Rockland, St. Lawrence, Saratoga, Schenectady, Schoharie, Steuben, Suffolk, Sullivan, Tioga, Tompkins, Ulster, Warren, Washington, Wayne, Westchester, Wyoming
+These counties are suitable as their MOE is less than 5%, an indication
+that the data is reliable.
 
-These counties are suitable as their MOE is less than 5%, an indication that the data is reliable. 
+2.  **Counties requiring additional oversight:** Essex, Greene,
+    Schuyler, Seneca, Yates
 
-2. **Counties requiring additional oversight:** [List counties with moderate confidence data and describe what kind of monitoring would be needed]
+These counties need additional oversight as their MOE is between 5 and
+10%. To boost confidence, the algorithm should incorporate factors that
+weigh income data. Otherwise, more diligent processes would be required
+when conducting census sampling.
 
-Essex, Greene, Schuyler, Seneca, Yates
+3.  **Counties needing alternative approaches:** Hamilton
 
-These counties need additional oversight as their MOE is between 5 and 10%. To boost confidence, the algorithm should incorporate factors that weigh income data. Otherwise, more diligent processes would be required when conducting census sampling.
-
-3. **Counties needing alternative approaches:** [List counties with low confidence data and suggest specific alternatives - manual review, additional surveys, etc.]
-
-Hamilton
-
-This county has an MOE greater than 10%, which indicates that the data is unreliable. To counteract this, manual review should occur to validate estimates before being processed by the algorithm. Otherwise, the only two options are to incorporate local data into findings, or exclude all data until reliable findings are available.
+This county has an MOE greater than 10%, which indicates that the data
+is unreliable. To counteract this, manual review should occur to
+validate estimates before being processed by the algorithm. Otherwise,
+the only two options are to incorporate local data into findings, or
+exclude all data until reliable findings are available.
 
 ## Questions for Further Investigation
 
-[List 2-3 questions that your analysis raised that you'd like to explore further in future assignments. Consider questions about spatial patterns, time trends, or other demographic factors.]
-
-1. How have MOEs changed over time? Have demographic estimates improved as the federal government now better recognizes minorities in the US?
-2. Is it a trend across over states to have clusters of high or low MOE tracts? And if so, what is the common thread between these tracts?
+1.  How have MOEs changed over time? Have demographic estimates improved
+    as the federal government now better recognizes minorities in the
+    US?
+2.  Is it a trend across over states to have clusters of high or low MOE
+    tracts? And if so, what is the common thread between these tracts?
 
 # Technical Notes
 
-**Data Sources:** 
-- U.S. Census Bureau, American Community Survey 2018-2022 5-Year Estimates
-- Retrieved via tidycensus R package on 9/28/25
+**Data Sources:** - U.S. Census Bureau, American Community Survey
+2018-2022 5-Year Estimates - Retrieved via tidycensus R package on
+9/28/25
 
-**Reproducibility:** 
-- All analysis conducted in R version 2025.05.1+513
-- Census API key required for replication
-- Complete code and documentation available at: [your portfolio URL]
+**Reproducibility:** - All analysis conducted in R version
+2025.05.1+513 - Census API key required for replication - Complete code
+and documentation available at: \[your portfolio URL\]
 
-**Methodology Notes:**
-N/A - no extreme decisions were made that would affect future reproducibility. 
+**Methodology Notes:** N/A - no extreme decisions were made that would
+affect future reproducibility.
 
-**Limitations:**
-Limitations include sample size issues, geographic scope, and user success with R.
+**Limitations:** Limitations include sample size issues, geographic
+scope, and user success with R.
 
----
+------------------------------------------------------------------------
 
 ## Submission Checklist
 
 Before submitting your portfolio link on Canvas:
 
-- [ ] All code chunks run without errors
-- [ ] All "[Fill this in]" prompts have been completed
-- [ ] Tables are properly formatted and readable
-- [ ] Executive summary addresses all four required components
-- [ ] Portfolio navigation includes this assignment
-- [ ] Census API key is properly set 
-- [ ] Document renders correctly to HTML
+-   [ ] All code chunks run without errors
+-   [ ] All "\[Fill this in\]" prompts have been completed
+-   [ ] Tables are properly formatted and readable
+-   [ ] Executive summary addresses all four required components
+-   [ ] Portfolio navigation includes this assignment
+-   [ ] Census API key is properly set
+-   [ ] Document renders correctly to HTML
 
-**Remember:** Submit your portfolio URL on Canvas, not the file itself. Your assignment should be accessible at `your-portfolio-url/assignments/assignment_1/your_file_name.html`
+**Remember:** Submit your portfolio URL on Canvas, not the file itself.
+Your assignment should be accessible at
+`your-portfolio-url/assignments/assignment_1/your_file_name.html`
