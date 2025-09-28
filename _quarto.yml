@@ -8,7 +8,7 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - text: Weekly Notes 
+      - text: Weekly Notes
         menu:
           - href: weekly-notes/week-01-notes.qmd
             text: Week 1
@@ -16,7 +16,7 @@ website:
             text: Week 2
           - href: weekly-notes/week-03-notes.qmd
             text: Week 3
-      - text: Assignments 
+      - text: Assignments
         menu:
           - href: assignments/assignment_1/assignment1.qmd
             text: "Assignment 1: Census Data Exploration"
