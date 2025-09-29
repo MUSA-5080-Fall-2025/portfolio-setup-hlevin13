@@ -1,6 +1,6 @@
 ---
 title: "Week 3 In-Class Lab: Data Visualization and EDA"
-author: "Elizabeth Delmelle"
+author: "Hope Levin"
 date: today
 format: 
   html:
@@ -25,7 +25,7 @@ library(tidycensus)
 library(scales)
 library(RColorBrewer)
 # Set your Census API key if you haven't already
-census_api_key(Sys.getenv("CENSUS_API_KEY"))
+census_api_key(Sys.getenv("5a82e243438bea307ae1c04f150d539c4db5fa47"))
 
 # We'll use Pennsylvania data for consistency with previous weeks
 state_choice <- "PA"
@@ -63,7 +63,7 @@ head(acs_vars_2022)
 ```{r}
 # Search for population-related variables
 population_vars <- acs_vars_2022 %>%
-  filter(str_detect(label, "Total.*population"))
+  filter(str_detect(label, "Total.*population")) # looking for total something population
 
 # Look at the results
 head(population_vars, 10)
@@ -85,10 +85,10 @@ head(pop_concept)
 ```{r}
 # Search for median income
 income_vars <- acs_vars_2022 %>%
-  filter(str_detect(label, "[Mm]edian.*income"))
+  filter(str_detect(label, "[Mm]edian.*income")) # Mm is a trick for capitalization - searches for all variations
 
 # Look specifically for household income
-household_income <- income_vars %>%
+household_income <- income_vars %>% # from those incomes found, look for household
   filter(str_detect(label, "household"))
 
 print("Household income variables:")
@@ -105,10 +105,16 @@ head(income_concept)
 `B19013_001`
 
 ### 0.4 Search for Age Variables
-
 **Your Task:** Find median age variables.
+```{r}
+age_vars <- acs_vars_2022 %>%
+  filter(str_detect(label, "[Mm]edian.*age"))
 
-\[write the code below - first add a code chunk\]
+view(age_vars)
+
+``B01002_001`` - median age by sex across the US
+
+```
 
 ### 0.5 Advanced Search Techniques
 
@@ -130,7 +136,7 @@ income_not_family <- acs_vars_2022 %>%
 print("Income variables (not family income):")
 head(income_not_family)
 
-# Case-insensitive search using regex
+# Case-insensitive search using regex - ignores the case
 education_vars <- acs_vars_2022 %>%
   filter(str_detect(label, regex("bachelor", ignore_case = TRUE)))
 
@@ -253,7 +259,7 @@ describe what you see.
 # Create histogram of median income
 ggplot(county_data) +
   aes(x = median_incomeE) +
-  geom_histogram(bins = 15, fill = "steelblue", alpha = 0.7) +
+  geom_histogram(bins = 25, fill = "deeppink", alpha = 0.5) +
   labs(
     title = "Distribution of Median Household Income",
     x = "Median Household Income ($)",
@@ -308,6 +314,20 @@ and identify outliers.
 -   Create a boxplot to identify population outliers
 -   Find and list the 3 most populous and 3 least populous counties
 
+```{r}
+ggplot(county_data) +
+  aes(x = total_popE) +
+  geom_histogram(bins = 15, fill = "orchid", alpha = 0.5) +
+  labs(
+    title = "Total Population in PA",
+    x = "Count of People",
+    y = "Counties"
+  ) +
+  theme_minimal()
+```
+
+
+
 ------------------------------------------------------------------------
 
 ## Exercise 2: Two Variable Relationships
@@ -341,8 +361,8 @@ interesting points.
 # Enhanced scatter plot with trend line
 ggplot(county_data) +
   aes(x = total_popE, y = median_incomeE) +
-  geom_point(alpha = 0.7) +
-  geom_smooth(method = "lm", se = TRUE, color = "red") +
+  geom_point(alpha = 0.7, color = "blue") +
+  geom_smooth(method = "lm", se = TRUE, color = "red") + #se means standard error shading around
   labs(
     title = "Population vs Median Income in Pennsylvania Counties",
     subtitle = "2018-2022 ACS 5-Year Estimates",
@@ -397,6 +417,24 @@ income using different visualization techniques.
 -   Format the y-axis with dollar signs
 -   Add a title that mentions both variables
 
+```{r}
+ggplot(county_data) +
+  aes(x = median_ageE, y = median_incomeE) +
+  geom_point(alpha = 0.5, color = "red") +
+  geom_smooth(method = "loess", se = TRUE, color = "blue") + #se means standard error shading around
+  labs(
+    title = "Age vs Median Income in Pennsylvania Counties",
+    subtitle = "2018-2022 ACS 5-Year Estimates",
+    x = "Median Age",
+    y = "Median Income ($)",
+    caption = "Source: U.S. Census Bureau"
+  ) +
+  theme_dark() +
+  scale_x_continuous(labels = comma) +
+  scale_y_continuous(labels = dollar)
+```
+
+
 ------------------------------------------------------------------------
 
 ## Exercise 3: Data Quality Visualization 
@@ -441,7 +479,7 @@ categories.
 ```{r}
 # Box plots by population category
 ggplot(county_reliability) +
-  aes(x = pop_category, y = income_moe_pct, fill = pop_category) +
+  aes(x = pop_category, y = income_moe_pct, fill = pop_category) + # fill should vary based on category - randomly assigns
   geom_boxplot() +
   labs(
     title = "Data Reliability by County Size Category",
@@ -469,6 +507,48 @@ population vs age MOE percentage
 using `geom_hline()` with a blue dashed line 
 - Use `theme_classic()`instead of `theme_minimal()` 
 - Create a boxplot comparing age MOE across the three population categories
+
+```{r}
+# Calculate MOE percentages
+county_reliability <- county_data %>%
+  mutate(
+    age_moe_pct = (median_ageM / median_ageE) * 100,
+    pop_category = case_when(
+      total_popE < 50000 ~ "Small (<50K)",
+      total_popE < 200000 ~ "Medium (50K-200K)",
+      TRUE ~ "Large (200K+)"
+    )
+  )
+
+# scatter plot
+ggplot(county_reliability) +
+  aes(x = total_popE, y = age_moe_pct) +
+  geom_point(alpha = 0.7, color = "purple", size = 2) +
+  geom_hline(yintercept = 5, color = "blue", linetype = "dashed") +
+  labs(
+    title = "Reliability of Median Age Across Counties",
+    x = "Total Population",
+    y = "Margin of Error (%)",
+    caption = "Blue line = 5% reliability threshold"
+  ) +
+  theme_classic() +
+  scale_x_continuous(labels = comma)
+  scale_y_continuous(labels = percent)
+
+##boxplot  
+ggplot(county_reliability) +
+  aes(x = total_popE, y = age_moe_pct, fill = pop_category) +
+  geom_boxplot() +
+  labs(
+    title = "Reliability of Median Age Across Counties",
+    x = "Total Population",
+    y = "Margin of Error (%)"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none") 
+  scale_x_continuous(labels = comma)
+```
+
 
 ------------------------------------------------------------------------
 
@@ -511,11 +591,13 @@ county_faceted <- county_data %>%
     )
   )
 
+view(county_faceted)
+
 ggplot(county_faceted) +
   aes(x = total_popE, y = median_incomeE) +
   geom_point(alpha = 0.7) +
   geom_smooth(method = "lm", se = FALSE) +
-  facet_wrap(~age_category) +
+  facet_wrap(~age_category) + # ~ creates a separate plot : BY ...
   labs(
     title = "Population-Income Relationship by Age Profile",
     x = "Total Population",
