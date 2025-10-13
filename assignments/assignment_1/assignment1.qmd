@@ -2,7 +2,7 @@
 title: "Assignment 1: Census Data Quality for Policy Decisions"
 subtitle: "Evaluating Data Reliability for Algorithmic Decision-Making"
 author: "Hope Levin"
-date: today
+date: 2025-10-13
 format: 
   html:
     code-fold: false

@@ -2,7 +2,7 @@
 title: "Lab 0: Getting Started with dplyr"
 subtitle: "Your First Data Analysis"
 author: "Hope"
-date: today
+date: 2025-10-13
 format: 
   html:
     code-fold: false

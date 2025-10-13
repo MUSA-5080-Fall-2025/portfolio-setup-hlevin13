@@ -2,7 +2,7 @@
 title: "Assignment 2: Spatial Analysis and Visualization"
 subtitle: "Healthcare Access and Equity in Pennsylvania"
 author: "Hope Levin"
-date: 2025-10-12
+date: 2025-10-13
 format: 
   html:
     code-fold: false
