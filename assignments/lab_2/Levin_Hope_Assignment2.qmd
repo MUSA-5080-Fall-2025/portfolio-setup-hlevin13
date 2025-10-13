@@ -85,11 +85,23 @@ st_crs(hospitals)
 st_crs(census_tracts)
 ```
 
-**Questions to answer:** - How many hospitals are in your dataset? - 223
-hospitals. - How many census tracts? - 3,445 census tracts. - What
-coordinate reference system is each dataset in? - pa_counties: WGS 84 /
-Pseudo-Mercator EPSG: 3857 - hospitals: WGS 84 EPSG: 4326 -
-census_tracts: NAD83 EPSG: 4269
+**Questions to answer:**
+
+How many hospitals are in your dataset?
+
+-   223 hospitals
+
+How many census tracts?
+
+-   3,445 census tracts
+
+What coordinate reference system is each dataset in? :
+
+-   pa_counties: WGS 84 / Pseudo-Mercator EPSG: 3857
+
+-   hospitals: WGS 84 EPSG: 4326
+
+-   census_tracts: NAD83 EPSG: 4269
 
 ------------------------------------------------------------------------
 
@@ -131,9 +143,19 @@ median(pa_tract_data$median_incomeE, na.rm = TRUE)
 
 ```
 
-**Questions to answer:** - What year of ACS data are you using? - 2022
-ACS data - How many tracts have missing income data? - 63 tracts - What
-is the median income across all PA census tracts? - \$70,188
+**Questions to answer:**
+
+What year of ACS data are you using?
+
+-   2022 ACS data
+
+How many tracts have missing income data?
+
+-   63 tracts
+
+What is the median income across all PA census tracts?
+
+-   \$70,188
 
 ------------------------------------------------------------------------
 
@@ -170,16 +192,28 @@ vulnerable_pop <- vulnerable_pop %>%
   )
 ```
 
-**Questions to answer:** - What income threshold did you choose and
-why? - My income threshold is the bottom 25%, or \$55,924. By going with
-a quantile approach, I was able to determine the cutoff in context of
-the entire state. - What elderly population threshold did you choose and
-why? - Again, I went with a quantile approach for contextual
-understanding. However, I choose the top 25% as I was interested in
-seeing tracts with large elderly populations. - How many tracts meet
-your vulnerability criteria? - 168 tracts meet both criterias. - What
-percentage of PA census tracts are considered vulnerable by your
-definition? - 4.87% of tracts.
+**Questions to answer:**
+
+What income threshold did you choose and why?
+
+-   My income threshold is the bottom 25%, or \$55,924. By going with a
+    quantile approach, I was able to determine the cutoff in context of
+    the entire state.
+
+What elderly population threshold did you choose and why?
+
+-   Again, I went with a quantile approach for contextual understanding.
+    However, I choose the top 25% as I was interested in seeing tracts
+    with large elderly populations.
+
+How many tracts meet your vulnerability criteria?
+
+-   168 tracts meet both criterias.
+
+What percentage of PA census tracts are considered vulnerable by your
+definition?
+
+-   4.87% of tracts.
 
 ------------------------------------------------------------------------
 
@@ -218,15 +252,27 @@ vulnerable_pop %>%
 
 **Requirements:** - Use an appropriate projected coordinate system for
 Pennsylvania - Calculate distances in miles - Explain why you chose your
-projection - I chose Pennsylvania State Plane South, as it is the
-projection that I am most comfortable mapping with.
+projection
 
-**Questions to answer:** - What is the average distance to the nearest
-hospital for vulnerable tracts? - The average distance to the nearest
-tract for vulnerable tracts is 13.5 miles. - What is the maximum
-distance? - The maximum distance is 62.9 miles. - How many vulnerable
-tracts are more than 15 miles from the nearest hospital? - 47 tracts are
-more than 15 miles away from the nearest hospital.
+-   I chose Pennsylvania State Plane South, as it is the projection that
+    I am most comfortable mapping with.
+
+**Questions to answer:**
+
+What is the average distance to the nearest hospital for vulnerable
+tracts?
+
+-   The average distance to the nearest tract for vulnerable tracts is
+    13.5 miles.
+
+What is the maximum distance?
+
+-   The maximum distance is 62.9 miles.
+
+How many vulnerable tracts are more than 15 miles from the nearest
+hospital?
+
+-   47 tracts are more than 15 miles away from the nearest hospital.
 
 ------------------------------------------------------------------------
 
@@ -254,14 +300,23 @@ vulnerable_pop %>%
 
 ```
 
-**Questions to answer:** - How many tracts are underserved? - 47 tracts
-are underserved. - What percentage of vulnerable tracts are
-underserved? - Roughly 28% of tracts are underserved. - Does this
-surprise you? Why or why not? - Somewhat... having gone to college in
-upstate New York, I'm well aware of healthcare access disparities in
-rural America. However, I was anticipating the number to be much lower,
-around 20-25%. Shocking that such a high barrier exists given the
-supposed advancements in this country.
+**Questions to answer:**
+
+How many tracts are underserved?
+
+-   47 tracts are underserved.
+
+What percentage of vulnerable tracts are underserved?
+
+-   Roughly 28% of tracts are underserved.
+
+Does this surprise you? Why or why not?
+
+-   Somewhat...having gone to college in upstate New York, I'm well
+    aware of healthcare access disparities in rural America. However, I
+    was anticipating the number to be much lower, around 20-25%.
+    Shocking that such a high barrier exists given the supposed
+    advancements in this country.
 
 ------------------------------------------------------------------------
 
@@ -303,17 +358,27 @@ Number of underserved tracts\
 distance to nearest hospital for vulnerable tracts - Total vulnerable
 population
 
-**Questions to answer:** - Which 5 counties have the highest percentage
-of underserved vulnerable tracts? - I found that 21 counties share the
-same percentage of underserved vulnerable tracts - Armstrong, Cameron,
-Clarion, Clinton, Elk, Forest, Franklin, Fulton, Greene, Huntingdon,
-Indiana, Jefferson, Juniata, Lebanon, McKean, Monroe, Norththumberland,
-Perry, Potter, Somerset, and Tioga. - Which counties have the most
-vulnerable people living far from hospitals? - The top 5 counties of
-vulnerable people living from hospitals are 1. Monroe (58 miles), Perry,
-Franklin, Juniata, 5. Forest (50 miles). - Are there any patterns in
-where underserved counties are located? - Many of these counties are
-clustered in the Northwest, Central, and Southeast Pennsylvania.
+**Questions to answer:**
+
+Which 5 counties have the highest percentage of underserved vulnerable
+tracts?
+
+-   I found that 21 counties share the same percentage of underserved
+    vulnerable tracts - Armstrong, Cameron, Clarion, Clinton, Elk,
+    Forest, Franklin, Fulton, Greene, Huntingdon, Indiana, Jefferson,
+    Juniata, Lebanon, McKean, Monroe, Norththumberland, Perry, Potter,
+    Somerset, and Tioga.
+
+Which counties have the most vulnerable people living far from
+hospitals?
+
+-   The top 5 counties of vulnerable people living from hospitals are 1.
+    Monroe (58 miles), Perry, Franklin, Juniata, 5. Forest (50 miles).
+
+Are there any patterns in where underserved counties are located?
+
+-   Many of these counties are clustered in the Northwest, Central, and
+    Southeast Pennsylvania.
 
 ------------------------------------------------------------------------
 
@@ -625,15 +690,27 @@ summary(crime)
 
 ```
 
-**Questions to answer:** - What dataset did you choose and why? - I
-chose to focus on the school safety zones, because I live near a school
-and was curious about the chance of them being crime hotspots! - What is
-the data source and date? - Everything was sourced from OpenDataPhilly.
-I was unable to find the sourcing date for the school data, however, the
-crime data comes from 2022 (wanted to match it with the ACS data I
-pulled earlier). - How many features does it contain? - There are 2
-features. - What CRS is it in? Did you need to transform it? - I
-transformed everything to be in NAD83 Pennsylvania South.
+**Questions to answer:**
+
+What dataset did you choose and why?
+
+-   I chose to focus on the school safety zones, because I live near a
+    school and was curious about the chance of them being crime
+    hotspots!
+
+What is the data source and date?
+
+-   Everything was sourced from OpenDataPhilly. I was unable to find the
+    sourcing date for the school data, however, the crime data comes
+    from 2022 (wanted to match it with the ACS data I pulled earlier).
+
+How many features does it contain?
+
+-   There are 2 features.
+
+What CRS is it in? Did you need to transform it?
+
+-   I transformed everything to be in NAD83 Pennsylvania South.
 
 ------------------------------------------------------------------------
 
@@ -646,7 +723,7 @@ access to hospitals?" - "Are EMS stations appropriately located near
 vulnerable populations?" - "Do areas with low vehicle access have worse
 hospital access?"
 
-"How much crimes occurs near Philadelphia schools?"
+"How much crime occurs near Philadelphia schools?"
 
 ------------------------------------------------------------------------
 
@@ -737,7 +814,8 @@ you recieved after your first assignment.
 
 Hopefully I hid my API key this time! I've run into a few issues with
 that... from GitHub emailing me about it being available for anyone to
-access to Zhanchao alerting me on my last assignment.
+access to Zhanchao alerting me on my last assignment. Also, I tried to
+format my data better and add comments throughout.
 
 ------------------------------------------------------------------------
 
