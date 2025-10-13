@@ -112,7 +112,7 @@ age_vars <- acs_vars_2022 %>%
 
 view(age_vars)
 
-``B01002_001`` - median age by sex across the US
+# ``B01002_001`` - median age by sex across the US
 
 ```
 
