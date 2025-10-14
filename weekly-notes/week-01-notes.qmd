@@ -1,0 +1,21 @@
+---
+title: "Week 1 Notes - Course Introduction"
+date: "2025-09-08"
+---
+
+## Key Concepts Learned
+- Introduction to GitHub and RStudio.
+
+## Coding Techniques
+- We covered the basics of adding functions.
+- Didn't cover Quarto in today's class, but did learn that you can make PowerPoints with it!
+
+## Questions & Challenges
+- Setting everything up... it took some time.
+- I need to practice adding functions and making sure they work.
+
+## Connections to Policy
+- I learned that you can use this class to analyze the housing market! Excited for that.
+
+## Reflection
+- The possibilities of where this class can take me... it feels open and like I can take it anywhere.
