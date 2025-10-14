@@ -1,25 +1,22 @@
-# MUSA 5080: Public Policy Analytics
-**Fall 2025 • Dr. Elizabeth Delmelle**
+[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/SmazhzpM)
+# MUSA 5080 Student Portfolio Template
 
-## Quick Links
-- [Syllabus](https://musa-5080-fall-2025.github.io/MUSA-5080-Fall-2025/syllabus/)
-- [Student Portfolio Template](https://github.com/MUSA-5080-Fall-2025/musa-5080-fall-2025-portfolio-setup-student-portfolio-template)
-- [Instructor Example Portfolio](https://ecdelmelle.github.io/MUSA-5080-instructor-portolio/)
+This template helps you create a professional portfolio for Public Policy Analytics coursework.
 
-## Repository Structure
-- `lectures/` - Weekly slides and demo code
-- `labs/` - Assignment instructions and templates  
-- `resources/` - Setup guides, references, troubleshooting
+## Quick Setup
+1. **Personalize:** Edit `_quarto.yml` to include your name
+2. **About:** Update `index.qmd` with your information
+3. **Build:** Run `quarto render` to generate your website
+4. **Deploy:** Enable GitHub Pages in Settings → Pages
 
-## Lectures
-- [Week 1: Introduction to R and dplyr](https://musa-5080-fall-2025.github.io/MUSA-5080-Fall-2025/lectures/week-01-intro/week1_lecture_slides.html)
-- [Week 2: Algorithmic Decision Making & The Census](https://musa-5080-fall-2025.github.io/MUSA-5080-Fall-2025/lectures/week-02/lectures/week2_slides.html)
-- [Week 3: EDA and Visualization](https://musa-5080-fall-2025.github.io/MUSA-5080-Fall-2025/lectures/week-03/lecture/week3.html)
-- [Week 4: GIS & Spatial Analysis in R](https://musa-5080-fall-2025.github.io/MUSA-5080-Fall-2025/lectures/week-04/lecture/week4_slides.html)
-- [Week 5: Intro to Predictive Modeling with Linear Regression](https://musa-5080-fall-2025.github.io/MUSA-5080-Fall-2025/lectures/week-05/lecture/week5-complete-slides.html)
-- [Week 6: Spatial Machine Learning - Linear Regression Cont.](https://musa-5080-fall-2025.github.io/MUSA-5080-Fall-2025/lectures/week-06/lecture/week6_slides.html)
-## Labs 
-- [Lab setup instructions](https://musa-5080-fall-2025.github.io/MUSA-5080-Fall-2025/labs/lab_setup_instructions.html)
-- [Lab 0 Template](labs/lab_0/lab0_template.qmd)
-- [Lab 1 Template](labs/lab_1/assignment1_template.qmd)
-- [Lab 2 Template](labs/lab_2/assignment2_template.qmd)
+## Portfolio Structure
+- `index.qmd` - Homepage
+- `weekly-notes/` - Learning reflections for each week
+- `labs/` - Assignment analyses (you'll add this)
+
+## Weekly Notes
+Create a new file `weekly-notes/week-XX-notes.qmd` for each week.
+
+### Example Portfolio
+See what you're building toward: **[Dr. Delmelle's Sample Portfolio](https://ecdelmelle.github.io/MUSA-5080-instructor-portolio/)**
+

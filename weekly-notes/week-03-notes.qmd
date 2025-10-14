@@ -1,0 +1,41 @@
+---
+title: "Week 3 Notes"
+date: "2025-09-22"
+---
+
+## Key Concepts Learned
+- Anscombe's Quartet
+  * Four datasets with identical summary statistics
+  * Same means, variances, correlation, and regression line
+- The ggplot2 Philosophy
+   * Data > aesthetics > geometries > visual
+   * g <- ggplot(data = your_data) + aes(x = income, y = %_bach) + geom_something (color = "blue")
+- Exploratory data analysis - what does the data look like? what patterns exist?
+
+## Coding Techniques
+- aes (aesthethic) describes how variables in the data are mapped to visual properties of geoms
+   * This is not where you pick out the color or size... do that in geom_something
+   * Aesthetics go inside aes(), constants go outside
+- Aesthetic Mappings
+   * x,y - position
+   * color - point/line color
+   * fill - area fill color
+   * size - point/line size
+   * shape - point shape
+   * alpha - transparency
+- regrex ignores cases when searching
+- [Xx] is a trick to search for all capitalization variations
+- ""Total.*population" = looking for "total something population"
+
+## Questions & Challenges
+- Remembering to update table names.
+
+## Connections to Policy
+- Policy Implications:
+   * Summary statistics can hide critical patterns
+   * Outliers may represent important communities
+   * Relationships aren’t always linear
+
+## Reflection
+- I have to reclone my repo way too often.
+- Class is moving on by without or without me ahaha!

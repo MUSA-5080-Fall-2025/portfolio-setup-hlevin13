@@ -20,5 +20,5 @@ I'm taking this course because I want to grow as a student.
 I took GIS last year and learned a little about R, but lack true depth in the topic.
 
 ## Contact
-- Email: hopelevi@upenn.edu
-- GitHub: hlevin13
+- Email: [hopelevi@upenn.edu]
+- GitHub: [hlevin13]

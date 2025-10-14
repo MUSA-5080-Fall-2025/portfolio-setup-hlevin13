@@ -1,0 +1,32 @@
+---
+title: "Week 4 Notes"
+date: "2025-09-29"
+---
+
+## Key Concepts Learned
+- sf Package
+  * Modern replacement for older spatial packages
+  * Integrates with tidyverse workflows
+- Spatial data is just data.frame + geometry column
+
+## Coding Techniques
+- st = spatial selection
+- dplyr = filter
+- The .predicate tells st_filter() what spatial relationship to look for
+  * Basic r predicate-structure: st_filter(data_to_filter, reference_geometry, .predicate = relationship)
+  * st_touches = share boundary, no interior overlap
+  * st_within =  completely inside
+  * st_intersects = any overlap at all
+- Using a dot (.) pulls down what was just referenced
+- To check current CRS: st_crs(pa_counties)
+- To set CRS (if missing): <- st_set_crs(pa_counties, 4326)
+- area_albers preserves area
+
+## Questions & Challenges
+- Whole lotta coordinate systems out there.
+
+## Connections to Policy
+- Policy often needs spatial analysis to answer questions, like "which communities have the lowest income? are they clustered?"
+
+## Reflection
+- Feeling more confident in class after completing assignment 1.
