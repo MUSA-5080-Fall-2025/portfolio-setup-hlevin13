@@ -66,14 +66,17 @@ library(ggplot2)
 # Census API key
 census_api_key(Sys.getenv("CENSUS_API_KEY"), install = FALSE)
 
-#| message: false
-#| warning: false
-#| echo: true
-
 # Load spatial data
 pa_counties <- st_read("data/Pennsylvania_County_Boundaries.shp")
 hospitals <- st_read("data/hospitals.geojson")
 census_tracts <- tracts(state = "PA", cb = TRUE)
+
+#solution to ugly lines
+options(tigris_use_cache = TRUE)
+options(tigris_progress = FALSE)
+
+options(get_acs_cache = TRUE)
+options(get_acs_progress = FALSE)
 
 # Questions to answer:
 hospitals %>%
