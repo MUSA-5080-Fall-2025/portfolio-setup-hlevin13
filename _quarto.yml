@@ -20,6 +20,8 @@ website:
             text: Week 4
           - href: weekly-notes/week-06-notes.qmd
             text: Week 6
+          - href: weekly-notes/week-07-notes.qmd
+            text: Week 7
       - text: Assignments
         menu:
           - href: assignments/assignment_1/assignment1.qmd

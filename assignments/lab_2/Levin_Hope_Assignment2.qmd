@@ -51,7 +51,7 @@ Pennsylvania hospitals (from lecture data) - Pennsylvania census tracts
 **Your Task:**
 
 ```{r}
- Load required packages
+# Load required packages
 library(sf)
 library(tidyverse)
 library(tigris)

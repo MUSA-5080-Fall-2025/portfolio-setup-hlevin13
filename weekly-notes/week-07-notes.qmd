@@ -1,55 +1,44 @@
 ---
-title: "Week 6 Notes"
-date: "2025-10-13"
+title: "Week 7 Notes"
+date: "2025-10-20"
 ---
 
 ## Key Concepts Learned
-- Baseline Models
-  * Coefficient of intercept = base price
-  * Coefficient of extra variable = additional cost
-  * p < 0.001 is statistically significant
-  * Ignores spatial features like school quality and nearby crime levels
-- Continuous Variables
-  * Square footage, age of house, income levels, distance to downtown
-- Categorical Variables
-  * Neighborhood, school district, building type
-- Interpreting Neighborhood Variables
-  * Positive coefficient = neighborhood is more expensive
-  * Negative coefficient = neighborhood is less expensive
-- No Interaction/Parallel Slopes
-  * Assumes that the added variable has the same effect in all neighborhoods
-- With Interaction/Different Slopes
-  * Assumes the added variable can have different effects in different neighborhoods
-  * Should not be used in small samples or overfitting
-- Buffer Aggregation
-  * Count or sum events within a defined distance
-- k-Nearest Neighbors
-  * Average distance to k closest events
-- Distance to Specific Points
-  * Straight-line distance to important locations
-- Fixed Effects
-  * Categorical variables that capture all unmeasured characteristics of a group
-  * Captures school quality, walkability, access to jobs - things we can't easily measure
-
-## Coding Techniques
-- Spatial Features
-  * better_model <- lm(SalePrice ~ LivingArea + R_FULL_BTH, data = boston)
-- Comparisons
-  * cat("Baseline R:", summary(baseline_model)$r.squared, "\n")
-- Convert to Spatial Data
-  * boston.sf <- boston %>%
-    * st_as_sf(coords = c("Longitude", "Latitude"), crs = 4326) %>%
-    * st_transform('ESRI:102286')  # MA State Plane (feet)
-- Create Binary Indicator
-  * boston.sf <- boston.sf %>%
-    * mutate(wealthy_neighborhood = ifelse(name %in% wealthy_hoods, "Wealthy", "Not Wealthy"),wealthy_neighborhood = as.factor(wealthy_neighborhood))
-
+- Model Errors
+  * y^i = predicted value
+  * yi = actual value
+- Good vs. Bad Errors
+  * Good = random errors (no pattern)
+  * Bad = clustered errors (spatial pattern visible)
+- Moran's I
+  * Measures spatial autocorrelation
+  * +1 = perfect positive correlation (clustering)
+  * 0 = random spatial pattern
+  * -1 = perfect negative correlation (dispersion)
+- Deviations
+  * Positive deviation = over-predicted (actual > predicted)
+  * Negative deviation = under-predicted (actual < predicted)
+- Ways to Define Spatial Relationships
+  * Contiguity - polygons that share a border
+  * Distance - all within x meters
+  * k-Nearest - closest k points
+- Interpreting Moran's I
+  * I > - and p < 0.05: significant clustering
+  * I = 0: random pattern (good)
+  * I < 0: dispersion (rare with errors)
+- If Moran's I is high:
+  * Add more spatial features
+  * Try spatial fixed effects
+  * Consider spatial regression models
+- Biased vs. Inconsistent
+  * Biased estimator - expected value does not equal true parameter
+  * Inconsistent estimator - doesn't converge to true value as n -> infinity
 
 ## Questions & Challenges
-- Challenged by everything!
+- Applying all of this to the mid-term assignment
 
 ## Connections to Policy
-- Indicates different housing markets, affordability crisis, and ways to design policy
+- Using these concepts to create a housing price prediction modeling
 
 ## Reflection
-- Not sure I'm understanding this week.
+- Each week keeps getting harder!
