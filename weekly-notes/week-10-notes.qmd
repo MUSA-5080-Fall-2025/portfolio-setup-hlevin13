@@ -1,0 +1,32 @@
+---
+title: "Week 10 Notes"
+date: "2025-11-10"
+---
+
+## Key Concepts Learned
+- Problem with Linear Regression
+  * Predictions can be > 1 or < 0 - makes no sense for probability
+  * Assumes constant effect across range - not realistic
+  * Violates regression assumptions
+- Logistic Regression
+  * Instead of predicting Y directly, predict the probability that Y = 1
+- When Do We Use Logistic Regression?
+  * Criminal Justice - will someone reoffend? will someone appear for court?
+  * Urban Planning - will a building be demolished? will a hosuehold participate in some program?
+  * Economics - will the loan default?
+- The Logit Transformation
+  * Models with the log odds, not the probability directly
+- ROC Curve Points
+  * x-axis = false positives
+  * y-axis = true postives/recall
+  * Area Under the Curve (AUC) - want to be bigger for finest model that catches the most true positives
+  
+
+## Questions & Challenges
+- 
+
+## Connections to Policy
+- 
+
+## Reflection
+- 

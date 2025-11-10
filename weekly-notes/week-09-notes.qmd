@@ -1,0 +1,49 @@
+---
+title: "Week 9 Notes"
+date: "2025-10-03"
+---
+
+## Key Concepts Learned
+- Dirty Data
+  * Missing, incorrect, or non-standardized data/formats
+  * Could be fabricated/manipulated, systemically biased, a proxy problem, or just missing
+- Crime Data is Always:
+  * Socially constructed
+  * Selectively enforced
+  * Organizationally filtered
+  * Politically shaped
+  * Technically mediated
+- Consent Decrees Don't Address
+  * Historical data generated during unconstitutional periods
+  * Ongoing use of that data in algorithms
+  * Data sharing with other jurisdictions
+  * Vendor accountability for bias mitigation
+  * Public transparency about predictive systems
+- Global Measures
+  * Moran’s I (one value for entire study area)
+  * Answers “is there spatial clustering overall?”
+  * Ranges from -1 (perfect dispersion) to +1 (perfect positive clustering)
+  * Doesn’t tell us where clusters are
+- Local Measures
+  * Local Moran’s I (one value per location)
+  * Answers “where are the clusters?”
+  * Maps show where patterns exist
+- Spatial Weight Matrix: Foundation
+  * W = weight between locations i and j
+  * If i and j are neighbors: w > 0
+  * If not neighbors: w ‎ =  0
+- Count Regression
+  * Can predict negative values
+  * Assumes constant variance, continuous outcome, and normal errors
+- Poisson Distribution
+  * Appropriate for count data (number of crimes per week, number of calls per hour)
+- Overdispersion Occurs:
+  * Unobserved heterogeneity
+  * Contagion effects
+  * Measurement error
+  * Model misspecification
+- Fishnet Grid
+  * Easier spatial operations
+  * Consistent unit of analysis
+  * Standard approach in predictive policing
+  * 250m x 250m for fine-grained; 500m x 500m for standard; 1000m x 1000m for coarse
