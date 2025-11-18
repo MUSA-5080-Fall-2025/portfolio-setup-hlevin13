@@ -1,3 +1,3 @@
-/.quarto/
-**/*.quarto_ipynb
-.Rproj.user
+.DS_Store
+assignments/lab_4/*.csv
+assignments/midterm/TechnicalAppendix_cache/html/*.rdb

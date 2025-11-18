@@ -1,0 +1,44 @@
+---
+title: "Week 4 Notes"
+date: "2025-09-27"
+---
+
+## Key Concepts Learned
+- Vector Data Model
+  * Simplified geometric representations
+  * Three basic types: points, lines, polygons
+  * Each feature has geometry and attributes
+- sf Package
+   * Modern replacement for older spatial packages
+   * Integrates with tidyverse workflows
+   * Spatial data is just data.frame + geometry column
+   * g <- ggplot(data = your_data) + aes(x = income, y = %_bach) + geom_something (color = "blue")
+- Exploratory data analysis - what does the data look like? what patterns exist?
+
+## Coding Techniques
+- aes (aesthethic) describes how variables in the data are mapped to visual properties of geoms
+   * This is not where you pick out the color or size... do that in geom_something
+   * Aesthetics go inside aes(), constants go outside
+- Aesthetic Mappings
+   * x,y - position
+   * color - point/line color
+   * fill - area fill color
+   * size - point/line size
+   * shape - point shape
+   * alpha - transparency
+- regrex ignores cases when searching
+- [Xx] is a trick to search for all capitalization variations
+- ""Total.*population" = looking for "total something population"
+
+## Questions & Challenges
+- Remembering to update table names.
+
+## Connections to Policy
+- Policy Implications:
+   * Summary statistics can hide critical patterns
+   * Outliers may represent important communities
+   * Relationships aren’t always linear
+
+## Reflection
+- I have to reclone my repo way too often.
+- Class is moving on by without or without me ahaha!

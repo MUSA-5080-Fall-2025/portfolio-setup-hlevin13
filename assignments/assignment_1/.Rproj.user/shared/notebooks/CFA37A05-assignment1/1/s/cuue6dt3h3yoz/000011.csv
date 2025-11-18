@@ -1,0 +1,8 @@
+"0",""
+"0","# Clean the county names to remove state name and ""County"" "
+"0","# Hint: use mutate() with str_remove()"
+"0","ny_clean <- ny_county %>%"
+"0","    mutate(NAME = str_remove (NAME, ""County, New York""))"
+"0",""
+"0","# Display the first few rows"
+"0","head(ny_clean)"

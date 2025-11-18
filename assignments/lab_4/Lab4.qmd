@@ -1,0 +1,527 @@
+---
+title: "Assignment 4: Spatial Predictive Analysis"
+author: "Hope Levin"
+date: 2025-11-16
+format: 
+  html:
+    code-fold: false
+    toc: true
+    toc-location: left
+    theme: cosmo
+    embed-resources: true
+execute:
+  warning: false
+  message: false
+editor: 
+  markdown: 
+    wrap: 72
+---
+```{r}
+library(tidyverse)
+library(caret)
+library(pROC)
+library(here)
+library(sf)
+library(ggplot2)
+library(lubridate)
+library(FNN)
+library(spdep)
+library(gridExtra)
+library(Metrics)
+library(spatstat)
+library(raster)
+library(dplyr)
+library(MASS)
+library(gridExtra)
+
+set.seed(2025)
+theme_set(theme_minimal())
+```
+
+
+## STEP 2: DATA ANALYSIS
+
+# PART 1: DATA LOADING AND EXPLORATION
+```{r}
+### CLEAN AND SUMMARIZE DATA
+setwd("/Users/hope/Documents/GitHub/portfolio-setup-hlevin13/assignments/lab_4")
+graffiti_data <- read_csv("GraffitiRemoval.csv")
+
+graffiti_data <- graffiti_data %>%
+  mutate(
+    `Creation Date` = mdy(`Creation Date`),
+    `Completion Date` = mdy(`Completion Date`),
+    year = year(`Creation Date`),
+    month = month(`Creation Date`),
+    completed = as.integer(Status == "Completed"),
+    days_to_complete = as.numeric(
+      difftime(`Completion Date`, `Creation Date`, units = "days")
+    ))
+
+graffiti_data <- graffiti_data %>%
+  dplyr::select(
+    completed,
+    year,
+    month,
+    days_to_complete,
+    Longitude,
+    Latitude
+  ) %>%
+  na.omit()
+
+cat("Completion rate:", round(mean(graffiti_data$completed), 3), "\n")
+
+summary <- graffiti_data %>%
+  summarise(
+    mean_days = mean(days_to_complete, na.rm = TRUE),
+    median_days = median(days_to_complete, na.rm = TRUE),
+    min_days = min(days_to_complete, na.rm = TRUE),
+    max_days = max(days_to_complete, na.rm = TRUE)
+  )
+
+### CHICAGO SPATIAL BOUNDARIES
+chicago <- st_read("/Users/hope/Documents/GitHub/portfolio-setup-hlevin13/assignments/lab_4/Chicago.geojson")
+
+ggplot(chicago) +
+  geom_sf() +
+    theme_minimal()
+
+graffiti_data <- graffiti_data %>%
+  mutate(
+    Longitude = as.numeric(Longitude),
+    Latitude  = as.numeric(Latitude)
+  ) %>%
+  filter(!is.na(Longitude), !is.na(Latitude))
+
+graffiti_data <- graffiti_data %>%
+  filter(
+    Longitude >= -87.95 & Longitude <= -87.50,
+    Latitude  >= 41.63 & Latitude  <= 42.05
+  )
+
+graffiti_sf <- graffiti_data %>%
+  st_as_sf(coords = c("Longitude", "Latitude"), crs = 4326)
+
+### VISUALIZATION
+graffiti_sf <- graffiti_sf %>%
+  mutate(completed = factor(completed, levels = c(0, 1), labels = c("Incomplete", "Completed")))
+
+ggplot() +
+  geom_sf(data = chicago, fill = "white", color = "black") +
+  geom_sf(
+    data = graffiti_sf,
+    aes(color = completed),
+    alpha = 0.5,
+    size = 1
+  ) +
+  scale_color_manual(values = c("Incomplete" = "red", "Completed" = "green"))+
+  labs(
+    title = "Distribution of Graffiti Removal Requests in Chicago",
+    subtitle = "Based on Chicago 311 Service Requests",
+    color = "Request Status"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold"),
+    plot.subtitle = element_text(face = "italic"),
+    legend.position = "bottom"
+    )
+```
+
+# PART 1: SUMMARY
+```{r}
+# WHAT: In Part 1, I loaded Graffiti Removal data from the Chicago 311 database. I also loaded the Chicago boundary. When cleaning my data, I selected only relevant information to keep later analysis straight forward. For instance, some of reports were almost 100 years old- not relevant! Another part of cleaning the data was ensuring it fell within the city boundaries. This section ended with a visualization of the spatial distribution of requests.
+
+# WHY: Cleaning and summarizing data is crucial to ensure accuracy and an easy process for the steps ahead. Filtering for for information like valid coordinates or completion date can help to detect outliers or missing data before actual analysis.
+
+# FOUND: After mapping the data, geographic clusters were evident. North Chicago had the most incomplete requests, with higher numbers of completed requests trickling down south. 
+
+```
+
+
+# PART 2: FISHNET GRID CREATION
+```{r}
+### CREATE FISHNET
+
+crs_proj <- 26971
+
+chicago_poly <- st_transform(chicago, crs_proj)
+graffiti_points <- st_transform(graffiti_sf, crs_proj)
+
+cell_size <- 500
+
+fishnet <- st_make_grid(
+  chicago_poly,
+  cellsize = cell_size,
+  square = TRUE,
+  what = "polygons"
+) %>%
+  st_sf() %>%
+  mutate(uniqueID = row_number())
+
+fishnet <- st_intersection(fishnet, chicago_poly)
+
+### AGGREGATE
+graffiti_counts <- st_join(graffiti_points, fishnet) %>%
+  st_drop_geometry() %>%
+  group_by(uniqueID) %>%
+  summarize(countGraffiti = n())
+
+fishnet <- fishnet %>%
+  left_join(graffiti_counts, by = "uniqueID") %>%
+  mutate(countGraffiti = replace_na(countGraffiti, 0))
+
+### VISUALIZE
+ggplot() +
+  geom_sf(data = chicago_poly, fill = "white", color = "black") +
+  geom_sf(data = fishnet, aes(fill = countGraffiti), color = NA, alpha = 0.8) +
+  scale_fill_viridis_c(option = "magma", trans = "sqrt") +
+  labs(
+    title = "Graffiti Removal Requests per 500m x 500m Grid",
+    subtitle = "Based on Chicago 311 Service Requests",
+    fill = "Request Count"
+  ) +
+  coord_sf()+
+  theme_minimal(base_size = 14)+
+  theme(
+    plot.title = element_text(face = "bold"),
+    plot.subtitle = element_text(face = "italic"),
+    legend.position = "right"
+  )
+```
+# PART 2: SUMMARY
+```{r}
+# WHAT: In Part 2, I created a 500 x 500 m fishnet grid over Chicago. This was done by projecting graffiti removal request and city points to the same coordinate system. I then created a grid and clipped it to the city boundary. After, I aggregated graffiti removal requests into each grid cell. I ended with a visualization showing the concentration of removal requests. 
+
+# WHY: Fishnet grids are a standard approach for many predictive policy models, as they are consistent and easy to understand. This visualization identified spatial patterns that created baseline knowledge before model building.
+
+# FOUND: Removal requests are unevenly distributed across the city. An interesting pattern was created, almost looking like solar rays. The top most "ray" aligns with the incomplete request findings in Part 1, which is perhaps indictive of the neighborhood's socioeconomic standing.
+
+```
+
+
+
+# PART 3: SPATIAL FEATURES
+```{r}
+
+# check projections
+chicago_poly <- st_transform(chicago, crs_proj)
+graffiti_points <- st_transform(graffiti_sf, crs_proj)
+fishnet <- st_transform(fishnet, crs_proj)
+
+### K-NEAREST NEIGHBOR FEATURES
+nn_dist <- get.knnx(
+  data = st_coordinates(graffiti_points),
+  query = st_coordinates(st_centroid(fishnet)),
+  k = 1
+)
+
+fishnet$graffiti_nn <- nn_dist$nn.dist[,1]
+
+#### LOCAL MORAN'S I ANALYSIS
+neighbors <- poly2nb(fishnet)
+weights <- nb2listw(neighbors, style = "W", zero.policy = TRUE)
+
+local_moran <- localmoran(
+  fishnet$countGraffiti,
+  weights,
+  zero.policy = TRUE
+)
+
+fishnet <- fishnet %>%
+  mutate(
+    local_I = local_moran[, "Ii"],
+    p_value = local_moran[, "Pr(z != E(Ii))"],
+    z_score = local_moran[, "Z.Ii"],
+    hotspot = ifelse(local_I > 0 & p_value < 0.05, 1, 0)
+  )
+
+### DISTANCE TO HOTSPOT
+hotspot_cells <- filter(fishnet, hotspot == 1)
+
+hotspot_dist <- get.knnx(
+  data = st_coordinates(st_centroid(hotspot_cells)),
+  query = st_coordinates(st_centroid(fishnet)),
+  k = 1
+)
+
+fishnet$hotspot_nn <- hotspot_dist$nn.dist[, 1]
+
+#### VISUALIZATION
+
+# Create comparison maps
+p1 <- ggplot(fishnet) +
+  geom_sf(aes(fill = graffiti_nn), color = NA, alpha = 0.8) +
+  scale_fill_viridis_c(name = "Distance (m)", option = "plasma", trans = "sqrt") +
+  labs(title = "Distance to Nearest Graffiti Removal Request") +
+  coord_sf() +
+  theme_minimal(base_size = 14)
+
+p2 <- ggplot(fishnet) +
+  geom_sf(aes(fill = hotspot_nn), color = NA, alpha = 0.8) +
+  scale_fill_viridis_c(name = "Distance (m)", option = "magma", trans = "sqrt") +
+  labs(title = "Distance to Nearest Hotspot") +
+  coord_sf() +
+  theme_minimal(base_size = 14)
+
+grid.arrange(p1, p2, ncol = 1)
+```
+# PART 3: SUMMARY
+```{r}
+# WHAT: In Part 3, I found the distance to the nearest graffiti removal request for each grid cell using k-nearest neighbors. I then performed Local Moran's I Analysis to find statistically significant hotspots of requests. Lastly, I calculated the distance to the nearest hotspot for each cell.
+
+# WHY: Spatial features in predictive modeling are important for combating spillover effects and improving overall predictions. 
+
+# FOUND: The "Distance to Nearest Graffiti Removal Request" map reveals that most grid cells are close to a graffiti removal request. The areas with high distances are at the edge of the city, and did not contain any data. The "Distance to Nearest Hotspot" map showed clustering within grid cells, once again showing that areas on the edge of the city are far from the action.
+
+```
+
+
+
+
+# PART 4: COUNT REGRESSION MODELS
+```{r}
+library(MASS)
+
+#### POISSION MODEL
+model_poisson <- glm(
+  countGraffiti ~ graffiti_nn + hotspot_nn,
+  data = fishnet,
+  family = poisson(link = "log")
+)
+
+exp(coef(model_poisson))
+
+### SCALE FIT
+fishnet_scale <- fishnet %>%
+  mutate(
+    log_graffiti = log1p(graffiti_nn),
+    log_hotspot  = log1p(hotspot_nn)
+  )
+
+fishnet_model <- fishnet_scale %>%
+  filter(
+    is.finite(countGraffiti),
+    is.finite(log_graffiti),
+    is.finite(log_hotspot)
+  )
+
+#### NEGATIVE BINOMIAL REGRESSION (with log predictors)
+model_nb <- MASS::glm.nb(
+  countGraffiti ~ log_graffiti + log_hotspot,
+  data = fishnet_model,
+  control = glm.control(maxit = 50)
+)
+
+summary(model_nb)
+
+### COMPARISON
+AIC(model_poisson)
+AIC(model_nb)
+
+model_nb$theta
+
+```
+# PART 4: SUMMARY
+```{r}
+# WHAT: In Part 4, I used logs in Poission regression to predict graffiti removal requests per grid cell. I then fit a Negative Binomial Regression to account for overdisperion in the data. Finally, I compared the model fit with AIC.
+
+# WHY: The Poission model can lead to poor fit due to overdisperion, which is when variance is greater than the mean. Negative Binomial Regressions allow for extra variability, helping with the issue of overdisperion. However, it's always important to double check, which is where the AIC comparison fits in.
+
+# FOUND: The Poission model had a very high AIC, 842,193, indicating poor fit. The Negative Binomial model had a much better AIC, at 29,533, indicating better fit. The estimated theta was 0.73, confirming overdisperion in the data. Including the spatial features from Part 3 proved to help improve the predictive modeling results.
+```
+
+
+
+
+
+# PART 5: SPATIAL CROSS-VALIDATION
+```{r}
+### LEAVE-ONE-GROUP-OUT CROSS VALIDATION
+graffiti_2017 <- graffiti_data %>%
+  filter(year == 2017) %>%
+  filter(!is.na(Longitude), !is.na(Latitude)) %>%
+  st_as_sf(coords = c("Longitude", "Latitude"), crs = 4326)
+
+crs_proj <- 26971
+graffiti_2017 <- st_transform(graffiti_2017, crs_proj)
+fishnet_2017 <- st_transform(fishnet, crs_proj)
+
+counts <- lengths(st_intersects(fishnet_2017, graffiti_2017))
+
+fishnet_2017 <- fishnet_2017 %>%
+  mutate(
+    countGraffiti = counts,
+    log_graffiti = log1p(graffiti_nn),
+    log_hotspot  = log1p(hotspot_nn)
+  )
+
+### SPATIAL DISTRICTS
+centroids <- st_centroid(fishnet_2017)
+coords <- st_coordinates(centroids)
+
+set.seed(123)
+k <- 10
+fishnet_2017$district <- as.factor(kmeans(coords, centers = k)$cluster)
+
+### LEAVE-ONE-GROUP-OUT CROSS VALIDATION
+cv_results <- list()
+districts <- unique(fishnet_2017$district)
+
+for (dist in districts) {
+  train_data <- fishnet_2017 %>% filter(district != dist)
+  test_data  <- fishnet_2017 %>% filter(district == dist)
+  
+  model_cv <- glm.nb(
+    countGraffiti ~ log_graffiti + log_hotspot,
+    data = train_data
+  )
+  
+  test_data$prediction <- predict(model_cv, newdata = test_data, type = "response")
+  
+  cv_results[[as.character(dist)]] <- test_data
+}
+
+all_predictions <- bind_rows(cv_results)
+
+### ERROR METRICS
+cv_metrics <- all_predictions %>%
+  group_by(district) %>%
+  summarize(
+    MAE = mean(abs(countGraffiti - prediction)),
+    RMSE = sqrt(mean(countGraffiti - prediction)^2),
+    ME = mean(countGraffiti - prediction)
+  )
+
+overall_MAE  <- mean(abs(all_predictions$countGraffiti - all_predictions$prediction))
+overall_RMSE <- sqrt(mean((all_predictions$countGraffiti - all_predictions$prediction)^2))
+overall_ME   <- mean(all_predictions$countGraffiti - all_predictions$prediction)
+```
+
+# PART 5: SUMMARY
+```{r}
+# WHAT: In Part 5, I used Leave-One-Group-Out (LOGO) Cross-Validation to evaluate the predictive performance of the Negative Binomial model. I filtered for 2017 graffiti removal requests, then aggregated them to the fishnet grid made in Part 2. R was having difficulty processing the large amounts of data, so I split the grid into 10 "districts" using k-means clustering. Each district had a Negative Binomial model. I ended with a Mean Absolute Error (MAE), Root mean Squared Error (RMSE), and Mean Error (ME) calculation.
+
+# WHY: Spatial cross-validation is important to combat the issue of leakage. LOGO not only solves the issue of spatial leakage, but also creates conservative performance estimates, which may be more realistic. 
+
+#FOUND: The analysis confirmed that Part 3's spatial features improve accuracy. However, given that MAE, ME, and RMSE figures are riddled with errors (high MAE, RMSE > ME, extremely negative ME), we can interpret this model to not be on a successful footing.
+
+```
+
+
+
+# PART 6: MODEL EVALUATION
+```{r}
+### PREP WORK
+graffiti_points_proj <- st_transform(graffiti_points, crs_proj)
+chicago_proj <- st_transform(chicago, crs_proj)
+fishnet_proj <- st_transform(fishnet, crs_proj)
+graffiti_proj <- st_transform(graffiti_points, crs_proj)
+
+
+graffitiproj <- graffiti_proj[, c("geometry", "year")]
+
+chicago_owin <- as.owin(chicago_proj)
+graffiti_coords <- st_coordinates(graffiti_points_proj)
+
+graffiti_ppp <- as.ppp(
+  X = graffiti_coords,
+  W = chicago_owin)
+
+### KDE
+kde_surface <- density.ppp(
+  graffiti_ppp,
+  sigma = 1000,
+  edge = TRUE,
+  dimyx = c(300,300)
+)
+
+kde_raster <- raster(as.im(kde_surface))
+
+### POINTS
+hotspot_sf <- st_as_sf(hotspot_cells, coords = c("Longitude", "Latitude"), crs = crs_proj)
+
+fishnet_proj$hotspot_count <- lengths(st_intersects(fishnet_proj, hotspot_sf))
+fishnet_proj$countGraffiti <- lengths(st_intersects(fishnet_proj, graffiti_proj))
+
+fishnet_proj <- fishnet_proj %>%
+  mutate(
+    log_graffiti = log1p(countGraffiti),
+    log_hotspot  = log1p(hotspot_count)
+  )
+
+### NEGATIVE BINOMIAL MODEL
+model_nb <- glm.nb(countGraffiti ~ log_graffiti + log_hotspot, data = fishnet_proj)
+
+fishnet_proj$predicted_count <- predict(model_nb, newdata = fishnet_proj, type = "response")
+
+### CATEGORIZE
+fishnet_proj$model_risk_category <- cut(
+  fishnet_proj$predicted_count,
+  breaks = quantile(fishnet_proj$predicted_count, probs = seq(0, 1, 0.2), na.rm = TRUE),
+  labels = c("1st (Lowest)", "2nd", "3rd", "4th", "5th (Highest)"),
+  include.lowest = TRUE
+)
+
+fishnet_proj$kde_risk <- raster::extract(kde_raster, st_coordinates(st_centroid(fishnet_proj)))
+fishnet_proj$kde_risk <- (fishnet_proj$kde_risk - min(fishnet_proj$kde_risk, na.rm = TRUE)) / (max(fishnet_proj$kde_risk, na.rm = TRUE) - min(fishnet_proj$kde_risk, na.rm = TRUE))
+
+fishnet_proj$kde_risk_category <- cut(
+  fishnet_proj$kde_risk,
+  breaks = quantile(fishnet_proj$kde_risk, probs = seq(0,1,0.2), na.rm = TRUE),
+  labels = c("1st (Lowest)", "2nd", "3rd", "4th", "5th (Highest)"),
+  include.lowest = TRUE
+)
+
+### RESULTS
+graffiti_2017 <- graffiti_points %>% filter(year == 2017)
+
+results_2017_model <- fishnet_proj %>%
+  st_join(graffiti_2017, left = FALSE) %>%
+  st_drop_geometry() %>%
+  group_by(model_risk_category) %>%
+  summarize(graffiti_2017 = n(), .groups = "drop") %>%
+  mutate(pct_of_total = 100 * graffiti_2017 / sum(graffiti_2017))
+
+results_2017_kde <- fishnet_proj %>%
+  st_join(graffiti_2017, left = FALSE) %>%
+  st_drop_geometry() %>%
+  group_by(kde_risk_category) %>%
+  summarize(graffiti_2017 = n(), .groups = "drop") %>%
+  mutate(pct_of_total = 100 * graffiti_2017 / sum(graffiti_2017))
+
+### COMPARISON
+comparison_data <- bind_rows(
+ results_2017_model %>%
+    mutate(Method = "Negative Binomial Model") %>%
+    rename(risk_category = model_risk_category),
+  results_2017_kde %>%
+    mutate(Method = "Kernel Density") %>%
+    rename(risk_category = kde_risk_category)
+ )
+
+ggplot(comparison_data, aes(x = risk_category, y = pct_of_total, fill = Method)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  scale_fill_manual(values = c("darkgreen", "deeppink4")) +
+  labs(
+    title = "Percentage of 2017 Graffiti Requests Captured",
+    subtitle = "Negative Binomial Model vs KDE Baseline",
+    x = "Risk Category",
+    y = "% of Total 2017 Graffiti Requests"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold"),
+    plot.subtitle = element_text(face = "italic"),
+    legend.position = "bottom"
+    )
+```
+# PART 6: SUMMARY
+```{r}
+#WHAT: In Part 6, I compared my Negative Binomial model to a Kenel Density Estimation (KDE). I had to convert the graffiti removal request points into a pattern to estimate the KDE surface over the city. I then normalized KDE values in the fishnet grid to create a risk score. After, I fit a Negative Binomial regression using log-transformed graffiti removal request data and hotspot count. This predicted counts for each grid cell. To prepare for my comparison, I created five risk categories based on quantiles. Then, I overlaid the points on the city grid, finding the percentage of total 2017 graffiti removal requests captured. Visually this was shown with a bar chart comparing my Negative Binomial Model and KDE Model.
+
+#WHY: Comparing Negative Binomial Models to KDE Baselines is important when wanting to understand predictive performances, as the side-by-side reveals the value added from spatial features and patterns. Additionally, KDE is simpler to create, so if the Negative Binomial Model performs worse, we know which model to proceed with in the future for a quick, streamlined analysis.
+
+#FOUND: The KDE model outperformed my Negative Binomial model in every category but the 5th! Ouch! However, it captures about 12% more requests in the 5th category, suggesting that it is superior for identiyfing areas with a greater likelihood for removal requests.
+```
+

@@ -33,7 +33,9 @@ website:
           - href: assignments/lab_2/Levin_Hope_Assignment2.qmd
             text: "Assignment 2: Spatial Analysis and Visualization"
           - href: assignments/midterm/TechnicalAppendix.qmd
-            text: "Midterm Challenge: Philadelphia Housing Price Prediction"  
+            text: "Midterm Challenge: Philadelphia Housing Price Prediction" 
+          - href: assignments/lab_4/Lab4.qmd
+            text: "Assignment 4: Spatial Predictive Analysisn"  
     
 format:
   html:
