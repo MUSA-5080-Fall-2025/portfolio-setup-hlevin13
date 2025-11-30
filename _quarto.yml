@@ -35,7 +35,9 @@ website:
           - href: assignments/midterm/TechnicalAppendix.qmd
             text: "Midterm Challenge: Philadelphia Housing Price Prediction" 
           - href: assignments/lab_4/Lab4.qmd
-            text: "Assignment 4: Spatial Predictive Analysisn"  
+            text: "Assignment 4: Spatial Predictive Analysis"  
+          - href: assignments/Lab5HLAA/Lab5_RMD.Rmd
+            text: "Assignment 5: Space-Time Prediction of Bike Share Demand: Philadelphia Indego"  
     
 format:
   html:

@@ -1,3 +1,7 @@
 .DS_Store
 assignments/lab_4/*.csv
 assignments/midterm/TechnicalAppendix_cache/html/*.rdb
+/.quarto/
+**/*.quarto_ipynb
+assignments/Lab5HLAA/Lab5_RMD_cache/html/model4_16e01c317107018d440c6f2f188d0530.rdb
+assignments/Lab5HLAA/Lab5_RMD_cache/html/model5_090c327cf65eb921612f7070707da650.rdb
