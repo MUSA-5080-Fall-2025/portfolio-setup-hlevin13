@@ -232,7 +232,8 @@ philly_census <- get_acs(
   county = "Philadelphia",
   year = 2022,
   geometry = TRUE,
-  output = "wide"
+  output = "wide",
+  progress = FALSE
 ) %>%
   rename(
     Total_Pop = B01003_001E,
