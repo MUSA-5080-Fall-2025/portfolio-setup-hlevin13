@@ -1,0 +1,33 @@
+---
+title: "Week 5 Notes"
+date: "2025-10-06"
+---
+
+## Key Concepts Learned
+- Statistical Learning
+  * Set of approaches for estimating relationship between variables
+- f represents the true relationship between predictors and outcome
+  * Fixed but unknown
+  * Different X values produce different Y values through f
+  * Estimate for prediction and inference
+- Linear Regression
+  * Simple and interpretable
+  * Well-understood properties
+  * Assumes linearity
+  * Sensitive to outliers
+- Coefficients
+  * Intercept - not usually meaningful in practice
+  * Slope
+  * p-value < 0.001 > very unlikely to see this if true slope = 0 
+
+## Coding Techniques
+- Train/Test Split
+  * Solution: hold out some data to test predictions
+- Cross-Validation
+  * Multiple train/test splits for more stable estimate of true prediction performance
+  * RMSE = typical prediction error
+  * R^2 = percent of variation explained
+  * MAE = average absolute error
+
+## Connections to Policy
+- Automatically removing high-influence observations/outliers could erase important populations from analysis and lead to biased policy decisions

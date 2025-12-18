@@ -20,13 +20,3 @@ date: "2025-11-10"
   * x-axis = false positives
   * y-axis = true postives/recall
   * Area Under the Curve (AUC) - want to be bigger for finest model that catches the most true positives
-  
-
-## Questions & Challenges
-- 
-
-## Connections to Policy
-- 
-
-## Reflection
-- 

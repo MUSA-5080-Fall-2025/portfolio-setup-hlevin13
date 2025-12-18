@@ -1,0 +1,24 @@
+---
+title: "Week 12 Notes"
+date: "2025-11-24"
+---
+
+## Key Concepts Learned
+- K-means Clustering
+  * Unsupervised machine learning algorithm that groups observations into k clusters based on similarity
+  * Assigns each observation to the cluster with the nearest mean (centroid)
+  * Iteratively updates cluster assignments and centroids until convergence
+- Optimal Matching (OM) Algorithm
+  * Classic approach - borrowed from DNA sequence analysis
+
+## Coding Techniques
+- Parameters
+  * indel = 1: cost for insertion/deletion operations
+  * otto = 0.1: origin-transition tradeoff parameter
+  * norm = TRUE: normalize distances by sequence length
+
+## Connections to Policy
+- Sequences
+  * Tell us patterns of change across metro areas
+  * Where different processes (decline, gentrification) occur spatially
+  * Racial and ethnic dynamics tied to socioeconomic change

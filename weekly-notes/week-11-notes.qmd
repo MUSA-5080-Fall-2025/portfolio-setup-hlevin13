@@ -1,0 +1,34 @@
+---
+title: "Week 11 Notes"
+date: "2025-11-17"
+---
+
+## Key Concepts Learned
+- Panel Data
+  * Data that follows the same units over multiple time periods
+  * Cross-sectional data - each row = one observation; one snapshot in time
+  * Panel data - each row = unit * time period; repeat observations
+- Binning data lets you aggregate/find patterns at the second-level
+- Temporal Lags
+  * Past demand predicts future demand
+- Temporal Validation Problem
+  * You cannot train on the future to predict the past
+
+## Coding Techniques
+- Lag Variables
+  * lag1Hour = lag(Trip_Count, 1), # Previous hour
+6
+  * lag2Hours = lag(Trip_Count, 2), # 2 hours ago
+
+## Connections to Policy
+- Determining spatial patterns suggests infrastructure gaps in neighborhoods
+- Temporal patterns reveal operational windows that may need to be adjusted
+- High accuracy in:
+  * High-income neighborhoods
+  * Tourist areas
+  * Transit hubs
+- Lower accuracy in:
+  * Lower-income neighborhoods
+  * Residential periphery
+  * Less transit access
+- Could use panel data in transportation, public safety, housing, health, education, environment, or anytime you have same units observed repeatedly over time
